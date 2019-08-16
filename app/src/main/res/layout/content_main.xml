@@ -98,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
+
                     android:text="Signup"
                     tools:layout_editor_absoluteX="110dp"
                     tools:layout_editor_absoluteY="105dp" />
