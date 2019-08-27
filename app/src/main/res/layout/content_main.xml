@@ -44,7 +44,7 @@
                     android:text="Username" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/fieldEmail"
                     android:layout_width="163dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -68,7 +68,7 @@
                     android:text="Password" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/fieldPassword"
                     android:layout_width="162dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -83,7 +83,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/logInBtn"
+                    android:id="@+id/LogInBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -93,7 +93,7 @@
                     tools:layout_editor_absoluteY="105dp" />
 
                 <Button
-                    android:id="@+id/signUpBtn"
+                    android:id="@+id/SignUpBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -106,17 +106,23 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/mStatusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="what" />
+
+
+        <TextView
+            android:id="@+id/mDetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="details" />
     </LinearLayout>
 
 
 
-    <Button
-        android:id="@+id/btn_sign_out"
-        android:text="SignOut"
-        android:layout_centerInParent="true"
-        android:enabled="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 
 </RelativeLayout>
