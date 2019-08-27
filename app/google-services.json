@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "806993970367-rkr1597te5d8jg1vj1rk8j4jop2ihl9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flowergrass",
+            "certificate_hash": "562674991c94200297521737b48f1a35ac7bfb26"
+          }
+        },
+        {
           "client_id": "806993970367-h7uvuo9m4mpmhkhpj4urdamq7t6v742b.apps.googleusercontent.com",
           "client_type": 3
         }
