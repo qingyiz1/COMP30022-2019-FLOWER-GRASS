@@ -9,6 +9,18 @@
     tools:showIn="@layout/activity_main"
     >
 
+    <LinearLayout
+        android:id="@+id/family"
+        android:layout_width="256dp"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/family"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,7 +29,6 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:orientation="vertical"
-
         >
 
 
@@ -41,7 +52,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Username" />
+                    android:text="Username"
+                    android:textColor="#B8C6C7" />
 
                 <EditText
                     android:id="@+id/fieldEmail"
@@ -49,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColor="#B8C6C7" />
 
 
             </LinearLayout>
@@ -65,7 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Password" />
+                    android:text="Password"
+                    android:textColor="#B8C6C7" />
 
                 <EditText
                     android:id="@+id/fieldPassword"
@@ -73,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="#B8C6C7" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,44 +100,64 @@
                 <Button
                     android:id="@+id/LogInBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:text="Login"
+                    android:background="@drawable/sign_in_button"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="105dp" />
 
-                <Button
-                    android:id="@+id/SignUpBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-
-                    android:text="Signup"
-                    tools:layout_editor_absoluteX="110dp"
-                    tools:layout_editor_absoluteY="105dp" />
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/SignUpBtn"
+                android:layout_width="148dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+
+                android:background="#00FFFFFF"
+                android:text="Forgot Password?"
+                android:textColor="#B8C6C7"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="110dp"
+                tools:layout_editor_absoluteY="105dp" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/mStatusTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="what" />
+            android:text="what"
+            android:textColor="#B8C6C7"/>
 
 
         <TextView
             android:id="@+id/mDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="details" />
+            android:text="details"
+            android:textColor="#B8C6C7"/>
+
     </LinearLayout>
 
+    <Button
+        android:id="@+id/SignUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
 
-
-
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:text="Don't have an account?"
+        android:textColor="#4C86B3"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="105dp" />
 
 
 </RelativeLayout>
