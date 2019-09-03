@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Username"
-                    android:textColor="#B8C6C7" />
+                android:textColor="#B8C6C7" />
 
                 <EditText
                     android:id="@+id/fieldEmail"
@@ -62,6 +62,7 @@
                     android:layout_gravity="center_vertical"
                     android:ems="10"
                     android:inputType="text"
+                    android:text="Username"
                     android:textColor="#B8C6C7" />
 
 

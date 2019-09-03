@@ -268,7 +268,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.SignUpBtn) {
-            createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            Intent intent= new Intent(getApplicationContext(),SignupActivity.class);
+            startActivity(intent);
+            //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.LogInBtn) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());}
 //        } else if (i == R.id.signOutButton) {
