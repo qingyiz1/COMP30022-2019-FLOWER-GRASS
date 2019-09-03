@@ -110,7 +110,7 @@
 
             </LinearLayout>
 
-            <Button
+            Button
                 android:id="@+id/SignUpBtn"
                 android:layout_width="148dp"
                 android:layout_height="22dp"
@@ -155,7 +155,7 @@
         android:background="#00FFFFFF"
         android:text="Don't have an account?"
         android:textColor="#4C86B3"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="110dp"
         tools:layout_editor_absoluteY="105dp" />
