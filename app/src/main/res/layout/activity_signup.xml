@@ -37,7 +37,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/fieldEmail"
+                android:id="@+id/fieldEmail2"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -68,7 +68,7 @@
                 android:textColor="#B8C6C7" />
 
             <EditText
-                android:id="@+id/fieldPassword"
+                android:id="@+id/fieldPassword2"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
