@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 
-                            Intent intent= new Intent(getApplicationContext(),ProfileActivity.class);
+                            // Direct to Profile page
+                            Intent intent= new Intent(getApplicationContext(),Homepage.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -240,7 +241,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.LogInBtn) {
-            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());}
+            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+
+        }
+
 //        } else if (i == R.id.signOutButton) {
 //            signOut();
 //        } else if (i == R.id.verifyEmailButton) {
