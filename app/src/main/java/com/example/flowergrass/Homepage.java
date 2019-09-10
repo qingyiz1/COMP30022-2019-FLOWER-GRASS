@@ -61,7 +61,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         setChioceItem(0); // Set default Fragment
     }
     /**
-     * 初始化页面
+     * Initialisation
      */
     private void initView() {
         // Title bar
@@ -177,7 +177,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 }
                 break;
         }
-        fragmentTransaction.commit(); // 提交
+        fragmentTransaction.commit();
     }
 
     /**
