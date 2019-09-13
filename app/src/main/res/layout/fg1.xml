@@ -1,35 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Main page-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="@color/aquamarine"
-    android:orientation="vertical">
+    android:padding="10dp"
+    tools:context=".MainActivity" >
 
+    <RelativeLayout
+        android:id="@+id/img_slideshow_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
 
+        android:layout_marginTop="10dp"
+        android:background="@drawable/img_border" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/MP_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Test Button" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/img_name"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Main Page"
-            android:textSize="22sp"/>
+            android:layout_below="@+id/indicator"
+            android:background="#88343434"
+            android:ellipsize="end"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp"
+            android:singleLine="true"
+            android:textColor="#ededed" />
 
-    </LinearLayout>
+        <com.example.flowergrass.utils.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_pager"
+            android:padding="10dip" />
+    </RelativeLayout>
 
-</LinearLayout>
+    <View
+        android:id="@+id/div_a"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/img_slideshow_layout"
+        android:background="@color/view_divider_color" />
+
+    <View
+        android:id="@+id/div_b"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/div_a"
+        android:background="@color/darkorchid" />
+
+</RelativeLayout>

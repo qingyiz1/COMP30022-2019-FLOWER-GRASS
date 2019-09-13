@@ -10,16 +10,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class FirstFragment extends Fragment implements View.OnClickListener {
+    ViewPager viewPager;
+    SwipeAdapter swipeAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg1, container, false);
-
-        Button btn1 = view.findViewById(R.id.MP_button);
-        btn1.setOnClickListener(this);
 
         return view;
 
@@ -29,7 +33,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.MP_button:
+            case 1:
                 Log.d("Test", "onClickListener ist gestarted");
                 Toast.makeText(getContext(),"you Clicked MP",Toast.LENGTH_LONG).show();
 

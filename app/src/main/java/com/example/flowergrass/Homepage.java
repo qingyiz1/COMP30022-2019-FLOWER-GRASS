@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.flowergrass.fragments.HomeFragment;
+
 
 public class Homepage extends FragmentActivity implements View.OnClickListener {
     // Initialise Top Bar
@@ -22,7 +24,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
     private TextView titleTv;
 
     // Dine four Fragment objects
-    private FirstFragment fg1;
+    private HomeFragment fg1;
     private SecondFragment fg2;
     private ThirdFragment fg3;
     private FourthFragment fg4;
@@ -133,7 +135,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
 
                 // Create fragment and add to view if null
                 if (fg1 == null) {
-                    fg1 = new FirstFragment();
+                    fg1 = new HomeFragment();
                     fragmentTransaction.add(R.id.content, fg1);
                 } else {
                     // Show fragment if exists
