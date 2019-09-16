@@ -1,9 +1,9 @@
 package com.example.flowergrass.models;
 
-import com.google.firebase.database.IgnoreExtraProperties;
+
 
 // [START comment_class]
-@IgnoreExtraProperties
+
 public class Comment {
 
     public String uid;

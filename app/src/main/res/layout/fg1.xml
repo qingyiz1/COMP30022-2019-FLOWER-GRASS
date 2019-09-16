@@ -53,4 +53,10 @@
         android:layout_below="@+id/div_a"
         android:background="@color/darkorchid" />
 
+    <Button
+        android:id="@+id/new_PostBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/div_b"
+        android:text="New Post"></Button>
 </RelativeLayout>

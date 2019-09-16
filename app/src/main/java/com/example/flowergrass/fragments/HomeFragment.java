@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.flowergrass.Homepage;
+import com.example.flowergrass.NewPostActivity;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
 import com.example.flowergrass.data.Product;
@@ -48,16 +51,21 @@ public class HomeFragment extends Fragment {
     TextView imgNameTxt;
     PageIndicator mIndicator;
 
+
     AlertDialog alertDialog;
 
+    //Data - Temporary
     int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
-    boolean stopSliding = false;
-    String message;
 
+    boolean stopSliding = false;
+
+    //Sliding Animation
     private Runnable animateViewPager;
     private Handler handler;
 
     FragmentActivity activity;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,14 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fg1, container, false);
         InitImgSlider(view);
 
-        mIndicator.setOnPageChangeListener(new PageChangeListener());
+        Button PostBtn = view.findViewById(R.id.new_PostBtn);
+        PostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, NewPostActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -79,6 +94,7 @@ public class HomeFragment extends Fragment {
         mViewPager = view.findViewById(R.id.view_pager);
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         imgNameTxt = view.findViewById(R.id.img_name);
+        mIndicator.setOnPageChangeListener(new PageChangeListener());
     }
 
     public void runnable(final int size) {

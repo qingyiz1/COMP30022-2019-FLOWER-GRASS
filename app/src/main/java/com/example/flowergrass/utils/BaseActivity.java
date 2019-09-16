@@ -8,11 +8,16 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class BaseActivity extends AppCompatActivity {
 
+    // [START declare_database_ref]
+    protected FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // [END declare_database_ref]
     private ProgressDialog mProgressDialog;
+    protected FirebaseAuth mAuth;
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {

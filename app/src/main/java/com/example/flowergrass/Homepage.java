@@ -20,7 +20,10 @@ import com.example.flowergrass.fragments.SecondFragment;
 import com.example.flowergrass.fragments.ThirdFragment;
 
 
+
 public class Homepage extends FragmentActivity implements View.OnClickListener {
+
+
     // Initialise Top Bar
     private ImageView titleLeftImv;
     private TextView titleTv;
@@ -63,6 +66,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView();
         setChioceItem(0); // Set default Fragment
+
     }
     /**
      * Initialisation

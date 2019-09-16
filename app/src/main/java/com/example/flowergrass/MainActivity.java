@@ -20,8 +20,6 @@ import android.widget.Toast;
 import android.widget.Button;
 
 import com.example.flowergrass.utils.BaseActivity;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -40,10 +38,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
-
-    // [START declare_auth]
-    private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
