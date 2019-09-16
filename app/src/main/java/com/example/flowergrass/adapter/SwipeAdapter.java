@@ -1,4 +1,4 @@
-package com.example.flowergrass;
+package com.example.flowergrass.adapter;
 
 import android.content.Context;
 import android.text.Layout;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.flowergrass.R;
 
 public class SwipeAdapter extends PagerAdapter {
     private int[] image_resources = {R.drawable.background,R.drawable.family};

@@ -1,31 +1,18 @@
 package com.example.flowergrass.adapter;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.example.flowergrass.FirstFragment;
 import com.example.flowergrass.R;
-import com.example.flowergrass.data.Product;
 import com.example.flowergrass.fragments.HomeFragment;
-import com.example.flowergrass.fragments.ProductDetailFragment;
 //import com.nostra13.universalimageloader.core.DisplayImageOptions;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 //import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;

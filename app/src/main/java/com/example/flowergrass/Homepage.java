@@ -9,13 +9,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.flowergrass.fragments.FourthFragment;
 import com.example.flowergrass.fragments.HomeFragment;
+import com.example.flowergrass.fragments.SecondFragment;
+import com.example.flowergrass.fragments.ThirdFragment;
 
 
 public class Homepage extends FragmentActivity implements View.OnClickListener {

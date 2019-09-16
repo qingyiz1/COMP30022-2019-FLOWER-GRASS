@@ -69,13 +69,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg1, container, false);
-        findViewById(view);
+        InitImgSlider(view);
 
         mIndicator.setOnPageChangeListener(new PageChangeListener());
         return view;
     }
 
-    private void findViewById(View view) {
+    private void InitImgSlider(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         imgNameTxt = view.findViewById(R.id.img_name);
@@ -122,8 +122,6 @@ public class HomeFragment extends Fragment {
         }
         super.onPause();
     }
-
-
 
     public void showAlertDialog(String message, final boolean finish) {
         alertDialog = new AlertDialog.Builder(activity).create();

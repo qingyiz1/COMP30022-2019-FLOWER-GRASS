@@ -1,4 +1,4 @@
-package com.example.flowergrass;
+package com.example.flowergrass.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

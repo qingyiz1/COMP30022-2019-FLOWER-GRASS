@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
+
+import com.example.flowergrass.utils.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,41 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-
-    @VisibleForTesting
-    public ProgressDialog mProgressDialog;
-
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
-        }
-
-        mProgressDialog.show();
-    }
-
-    public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    public void hideKeyboard(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        hideProgressDialog();
-    }
-
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     protected static final String TAG = "EmailPassword";
 

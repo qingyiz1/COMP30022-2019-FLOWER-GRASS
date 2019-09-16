@@ -8,7 +8,7 @@ public class Product implements Parcelable {
 
     private int id;
     private String name;
-    private String imageUrl;
+    private int imageUrl;
 
     public Product() {
         super();

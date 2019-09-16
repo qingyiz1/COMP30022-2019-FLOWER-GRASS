@@ -9,7 +9,6 @@
         android:id="@+id/img_slideshow_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="10dp"
         android:background="@drawable/img_border" >
 
@@ -23,7 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/indicator"
-            android:background="#88343434"
+            android:background="@color/lightgray"
             android:ellipsize="end"
             android:paddingLeft="5dp"
             android:paddingTop="2dp"
