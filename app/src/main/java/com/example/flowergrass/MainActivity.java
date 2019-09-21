@@ -57,10 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         //findViewById(R.id.signOutButton).setOnClickListener(this);
         //findViewById(R.id.verifyEmailButton).setOnClickListener(this);
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
+
     }
 
     // [START on_start_check_user]

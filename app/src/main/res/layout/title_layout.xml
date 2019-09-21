@@ -11,14 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textStyle="bold"
-        android:text="Family"
+        android:text="@string/app_name"
         android:textSize="25sp"
+        android:layout_toStartOf="@id/title_text_tv"
         android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/title_imv"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:contentDescription="@string/create_new"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginEnd="10dp"
