@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="@color/bg_color">
 
     <RelativeLayout
         android:id="@+id/img_slideshow_layout"
@@ -44,7 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_below="@+id/img_slideshow_layout"
-        android:background="@color/view_divider_color" />
+        android:background="@color/view_divider_color" >
+
+    </View>
 
     <View
         android:id="@+id/div_b"
@@ -53,10 +56,19 @@
         android:layout_below="@+id/div_a"
         android:background="@color/darkorchid" />
 
-    <Button
-        android:id="@+id/new_PostBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/div_b"
-        android:text="New Post"></Button>
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is going on"
+            android:textSize="30sp"></TextView>
+
+    </LinearLayout>
+
 </RelativeLayout>

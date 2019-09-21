@@ -79,14 +79,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fg1, container, false);
         InitImgSlider(view);
 
-        Button PostBtn = view.findViewById(R.id.new_PostBtn);
-        PostBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, NewPostActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 

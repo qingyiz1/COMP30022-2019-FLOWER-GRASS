@@ -25,7 +25,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
 
 
     // Initialise Top Bar
-    private ImageView titleLeftImv;
+    private ImageView titleImv;
     private TextView titleTv;
 
     // Dine four Fragment objects
@@ -73,15 +73,15 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
      */
     private void initView() {
         // Title bar
-        titleLeftImv = findViewById(R.id.title_imv);
-        titleLeftImv.setOnClickListener(new View.OnClickListener() {
+        titleImv = findViewById(R.id.title_imv);
+        titleImv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Homepage.this, SignupActivity.class));
+                startActivity(new Intent(Homepage.this, NewPostActivity.class));
             }
         });
         titleTv = findViewById(R.id.title_text_tv);
-        titleTv.setText("Main Page");
+        titleTv.setText("Activity");
 
         // Bottom Nav Bar
         firstImage = findViewById(R.id.first_image);
@@ -138,7 +138,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // firstImage.setImageResource(R.drawable.XXXX);
                 firstText.setTextColor(dark);
                 firstLayout.setBackgroundColor(gray);
-
+                titleTv.setText("Activity");
                 // Create fragment and add to view if null
                 if (fg1 == null) {
                     fg1 = new HomeFragment();
@@ -153,6 +153,8 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // secondImage.setImageResource(R.drawable.XXXX);
                 secondText.setTextColor(dark);
                 secondLayout.setBackgroundColor(gray);
+                titleTv.setText("Timeline");
+
                 if (fg2 == null) {
                     fg2 = new SecondFragment();
                     fragmentTransaction.add(R.id.content, fg2);
@@ -165,6 +167,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // thirdImage.setImageResource(R.drawable.XXXX);
                 thirdText.setTextColor(dark);
                 thirdLayout.setBackgroundColor(gray);
+                titleTv.setText("Message");
                 if (fg3 == null) {
                     fg3 = new ThirdFragment();
                     fragmentTransaction.add(R.id.content, fg3);
@@ -177,6 +180,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // fourthImage.setImageResource(R.drawable.XXXX);
                 fourthText.setTextColor(dark);
                 fourthLayout.setBackgroundColor(gray);
+                titleTv.setText("Me");
                 if (fg4 == null) {
                     fg4 = new FourthFragment();
                     fragmentTransaction.add(R.id.content, fg4);
