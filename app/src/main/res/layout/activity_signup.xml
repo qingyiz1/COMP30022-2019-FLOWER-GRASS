@@ -131,6 +131,18 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/fieldBirthMonth"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ems="10"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:hint="Month"
+                android:textAlignment="center"
+                android:textColor="#B8C6C7" />
+
+            <EditText
                 android:id="@+id/fieldBirthDay"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
@@ -142,17 +154,7 @@
                 android:textAlignment="center"
                 android:textColor="#B8C6C7" />
 
-            <EditText
-                android:id="@+id/fieldBirthMonth"
-                android:layout_width="162dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:ems="10"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:hint="Month"
-                android:textAlignment="center"
-                android:textColor="#B8C6C7" />
+
 
             <EditText
                 android:id="@+id/fieldBirthYear"

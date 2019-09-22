@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
+import com.example.flowergrass.models.userModel;
 import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +39,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
+    public userModel newUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

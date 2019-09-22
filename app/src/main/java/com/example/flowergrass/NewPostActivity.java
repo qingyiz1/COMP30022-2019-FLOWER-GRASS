@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.OnProgressListener;
@@ -60,7 +62,7 @@ public class NewPostActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
-        //post = new Post(mAuth.getUid(),mAuth.getCurrentUser().toString(),mTitleField.getText().toString(),mBodyField.getText().toString());
+
         mTitleField = findViewById(R.id.fieldTitle);
         mBodyField = findViewById(R.id.fieldBody);
         chooseBtn = findViewById(R.id.chooseBtn);
@@ -69,11 +71,12 @@ public class NewPostActivity extends MainActivity {
         chooseBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
 
+        this.post = new Post(mAuth.getUid().toString(),currentUser.getNickname(),mTitleField.getText().toString(),mBodyField.getText().toString());
 
     }
 
     private void submitPost(){
-        db.collection("users").document(mAuth.getUid())
+        db.collection("posts").document(mTitleField.getText().toString())
                 .set(post.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -124,20 +127,23 @@ public class NewPostActivity extends MainActivity {
 
     }
     private void readData(){
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
+        DocumentReference docRef = db.collection("cities").document("SF");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d(TAG, "No such document");
                     }
-                });
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
 
     private void chooseFile(){

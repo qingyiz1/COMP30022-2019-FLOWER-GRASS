@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,11 +28,12 @@ import java.util.Map;
 
 public class SignupActivity extends MainActivity {
     Button signupBtn;
-    private EditText mEmailField;
-    private EditText mPasswordField;
-    private EditText mNickName;
-    private userModel user;
-    private List<Integer> birthday = new ArrayList<>();
+    private EditText mEmailField,mPasswordField,mNickName;
+    private EditText fieldBirthday,fieldBirthMonth,fieldBirthYear;
+    private userModel newUser;
+    private List<String> birthday = new ArrayList<>();
+    private String userUID;
+    protected static final String TAG = "SignUpActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,29 +41,31 @@ public class SignupActivity extends MainActivity {
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
 
-
         signupBtn = findViewById(R.id.SignUpBtn2);
         mEmailField = findViewById(R.id.fieldEmail2);
         mPasswordField = findViewById(R.id.fieldPassword2);
         mNickName = findViewById(R.id.fieldNickname2);
+        fieldBirthday = findViewById(R.id.fieldBirthDay);
+        fieldBirthMonth = findViewById(R.id.fieldBirthMonth);
+        fieldBirthYear = findViewById(R.id.fieldBirthYear);
 
-        birthday.add(R.id.fieldBirthDay);
-        birthday.add(R.id.fieldBirthMonth);
-        birthday.add(R.id.fieldBirthYear);
-        user = new userModel(birthday,mEmailField.getText().toString(),mNickName.getText().toString());
-        updateDatabase();
         findViewById(R.id.SignUpBtn2).setOnClickListener(this);
     }
 
 
-    public void updateDatabase(){
+    public void updateDatabase(String filePath){
+        birthday.add(fieldBirthMonth.getText().toString());
+        birthday.add(fieldBirthday.getText().toString());
+        birthday.add(fieldBirthYear.getText().toString());
+        this.newUser = new userModel(birthday,mEmailField.getText().toString(),mNickName.getText().toString());
+
         // Create a new user with a first and last name
         Map<String, Object> newUser = new HashMap<>();
-        newUser.put("Birthday", user.birthday.get(0)+"/"+user.birthday.get(1)+"/"+user.birthday.get(2));
-        newUser.put("Email", user.email);
-        newUser.put("Nickname", user.nickName);
+        newUser.put("Birthday", this.newUser.birthday.get(0)+"/"+ this.newUser.birthday.get(1)+"/"+ this.newUser.birthday.get(2));
+        newUser.put("Email", this.newUser.email);
+        newUser.put("Nickname", this.newUser.nickName);
 
-        db.collection("users").document(mAuth.getUid())
+        db.collection("users").document(filePath)
                 .set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -97,6 +99,9 @@ public class SignupActivity extends MainActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            userUID = mAuth.getUid();
+                            updateDatabase(userUID);
+                            Toast.makeText(getApplicationContext(),userUID,Toast.LENGTH_LONG).show();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -142,6 +147,7 @@ public class SignupActivity extends MainActivity {
         int i = v.getId();
         if (i == R.id.SignUpBtn2) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+
             Toast.makeText(SignupActivity.this,"sign up succeeded",Toast.LENGTH_LONG);
         }
     }
