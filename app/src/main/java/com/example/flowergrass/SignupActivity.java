@@ -2,6 +2,7 @@ package com.example.flowergrass;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -102,6 +103,8 @@ public class SignupActivity extends MainActivity {
                             userUID = mAuth.getUid();
                             updateDatabase(userUID);
                             Toast.makeText(getApplicationContext(),userUID,Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(SignupActivity.this,Homepage.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -148,7 +151,6 @@ public class SignupActivity extends MainActivity {
         if (i == R.id.SignUpBtn2) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
 
-            Toast.makeText(SignupActivity.this,"sign up succeeded",Toast.LENGTH_LONG);
         }
     }
 

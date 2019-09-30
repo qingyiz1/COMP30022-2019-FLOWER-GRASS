@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         findViewById(R.id.SignUpBtn).setOnClickListener(this);
         //findViewById(R.id.signOutButton).setOnClickListener(this);
         //findViewById(R.id.verifyEmailButton).setOnClickListener(this);
-
+        checkUserState();
 
     }
 
@@ -73,6 +74,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     // [END on_start_check_user]
 
 
+    private void checkUserState(){
+        if(mAuth.getCurrentUser() != null){
+            Intent intent= new Intent(getApplicationContext(),Homepage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+        }
+    }
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
@@ -96,6 +105,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             // Direct to Profile page
                             Intent intent= new Intent(getApplicationContext(),Homepage.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -200,9 +210,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (i == R.id.SignUpBtn) {
             Intent intent= new Intent(getApplicationContext(),SignupActivity.class);
             startActivity(intent);
+            finish();
             //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.LogInBtn) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+
+
 
         }
 

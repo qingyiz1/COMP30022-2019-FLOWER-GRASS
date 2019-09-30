@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SignupActivity"
+    android:background="@drawable/bg_sign_up"
     >
 
 
@@ -178,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@drawable/sign_in_button"
+            android:background="@drawable/btn_sign_up"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="105dp" />
 

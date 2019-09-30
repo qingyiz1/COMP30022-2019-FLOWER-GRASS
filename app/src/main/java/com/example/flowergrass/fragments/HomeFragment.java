@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -37,7 +38,10 @@ import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
 import com.example.flowergrass.data.Product;
 import com.example.flowergrass.utils.CirclePageIndicator;
+import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class HomeFragment extends Fragment {
 
@@ -78,7 +82,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg1, container, false);
         InitImgSlider(view);
-
+        loadWithGlide(view);
         return view;
     }
 
@@ -170,6 +174,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    public void loadWithGlide(View container) {
+        // [START storage_load_with_glide]
+        // Reference to an image file in Cloud Storage
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/test.jpg");
+
+        // ImageView in your Activity
+        ImageView imageView = container.findViewById(R.id.activity_image);
+
+        // Download directly from StorageReference using Glide
+        // (See MyAppGlideModule for Loader registration)
+        GlideApp.with(this /* context */)
+                .load(storageReference)
+                .into(imageView);
+        // [END storage_load_with_glide]
     }
 
 

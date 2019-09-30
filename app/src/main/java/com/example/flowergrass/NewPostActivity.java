@@ -52,10 +52,11 @@ public class NewPostActivity extends MainActivity {
     private EditText mBodyField;
     private Post post;
     private userModel currentUser;
-    private Button chooseBtn,uploadBtn;
+    private Button chooseBtn,uploadBtn,submitBtn;
     private ImageView uploadImg;
     UploadTask uploadTask;
     Uri filePath;
+    String nickName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,15 +68,18 @@ public class NewPostActivity extends MainActivity {
         mBodyField = findViewById(R.id.fieldBody);
         chooseBtn = findViewById(R.id.chooseBtn);
         uploadBtn = findViewById(R.id.uploadBtn);
+        submitBtn = findViewById(R.id.submitBtn);
         uploadImg = findViewById(R.id.uploadImg);
         chooseBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
-
-        this.post = new Post(mAuth.getUid().toString(),currentUser.getNickname(),mTitleField.getText().toString(),mBodyField.getText().toString());
+        submitBtn.setOnClickListener(this);
+        currentUser = new userModel();
+        currentUser.getNickname();
 
     }
 
     private void submitPost(){
+        this.post = new Post(mAuth.getUid(),currentUser.nickName,mTitleField.getText().toString(),mBodyField.getText().toString());
         db.collection("posts").document(mTitleField.getText().toString())
                 .set(post.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -178,7 +182,7 @@ public class NewPostActivity extends MainActivity {
         }else if(view == uploadBtn){
             //upload file to firebase storage
             uploadImg();
-        }else{
+        }else if(view == submitBtn){
             submitPost();
         }
     }

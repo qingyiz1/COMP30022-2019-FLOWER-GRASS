@@ -2,6 +2,8 @@ package com.example.flowergrass.models;
 
 
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.type.Date;
 
 import java.util.HashMap;
@@ -19,6 +21,8 @@ public class Post {
     public int thumbsUp = 0;
     public String imgSrc;
     public HashMap<String,Object> comments;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     public Post(String uid, String author, String title, String content) {
         this.uid = uid;
