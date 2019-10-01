@@ -102,6 +102,10 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         fourthLayout.setOnClickListener(Homepage.this);
     }
 
+
+    /**
+     * Bottom tab selection
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

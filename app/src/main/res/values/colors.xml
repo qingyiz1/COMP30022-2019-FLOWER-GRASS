@@ -8,6 +8,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="bg_color">#1F1F1F</color>
+    <color name="sign_up_text">#1E4220</color>
+    <color name="sign_up_text_hint">#F3F7B0</color>
     <color name="holo_blue_dark">#ff0099cc</color>
     <color name="view_divider_color">#BABABA</color>
     <color name="view_divider_color_2">#DADADA</color>

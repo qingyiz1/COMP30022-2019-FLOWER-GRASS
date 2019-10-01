@@ -17,9 +17,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.core.FirestoreClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,13 +61,14 @@ public class SignupActivity extends MainActivity {
         birthday.add(fieldBirthMonth.getText().toString());
         birthday.add(fieldBirthday.getText().toString());
         birthday.add(fieldBirthYear.getText().toString());
-        this.newUser = new userModel(birthday,mEmailField.getText().toString(),mNickName.getText().toString());
+        this.newUser = new userModel(birthday,mEmailField.getText().toString(),mNickName.getText().toString(), Timestamp.now());
 
         // Create a new user with a first and last name
         Map<String, Object> newUser = new HashMap<>();
         newUser.put("Birthday", this.newUser.birthday.get(0)+"/"+ this.newUser.birthday.get(1)+"/"+ this.newUser.birthday.get(2));
         newUser.put("Email", this.newUser.email);
         newUser.put("Nickname", this.newUser.nickName);
+        newUser.put("dateCreated",this.newUser.dateCreated);
 
         db.collection("users").document(filePath)
                 .set(newUser)
@@ -99,12 +103,11 @@ public class SignupActivity extends MainActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             userUID = mAuth.getUid();
                             updateDatabase(userUID);
-                            Toast.makeText(getApplicationContext(),userUID,Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(SignupActivity.this,Homepage.class);
                             startActivity(intent);
+                            finish();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

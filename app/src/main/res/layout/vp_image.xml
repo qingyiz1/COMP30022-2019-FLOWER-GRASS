@@ -3,12 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="10dp" >
+    >
 
     <ImageView
         android:id="@+id/image_display"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:contentDescription="@string/txt_image_slider" />
+
+    <TextView
+        android:id="@+id/img_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image_display"
+        android:background="#33051C3A"
+        android:ellipsize="end"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:singleLine="true"
+        android:textColor="#000000" />
+
 
 </RelativeLayout>

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".SignupActivity"
     android:background="@drawable/bg_sign_up"
+
     >
 
 
@@ -28,13 +29,13 @@
 
             <TextView
                 android:id="@+id/textView1"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="UserEmail"
-                android:textColor="#B8C6C7"
+                android:textColor="#1E4220"
                 android:textSize="16sp" />
 
             <EditText
@@ -42,11 +43,12 @@
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:ems="10"
                 android:layout_weight="8"
-
+                android:backgroundTint="@color/sign_up_text_hint"
+                android:cursorVisible="false"
+                android:ems="10"
                 android:inputType="text"
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text" />
 
 
         </LinearLayout>
@@ -66,18 +68,18 @@
                 android:text="Password"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text" />
 
             <EditText
                 android:id="@+id/fieldPassword2"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:ems="10"
                 android:layout_weight="8"
+                android:ems="10"
+                android:backgroundTint="@color/sign_up_text_hint"
                 android:inputType="textPassword"
-
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nickname"
-                android:textColor="#B8C6C7"
+                android:textColor="@color/sign_up_text"
                 android:textSize="16sp" />
 
             <EditText
@@ -103,11 +105,11 @@
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:ems="10"
                 android:layout_weight="8"
-
+                android:ems="10"
+                android:backgroundTint="@color/sign_up_text_hint"
                 android:inputType="text"
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text" />
 
 
         </LinearLayout>
@@ -128,7 +130,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="Birthday"
-                android:textColor="#B8C6C7"
+                android:textColor="@color/sign_up_text"
                 android:textSize="16sp" />
 
             <EditText
@@ -136,25 +138,27 @@
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:ems="10"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:ems="10"
                 android:hint="Month"
+
+                android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text"
+                android:textColorHint="@color/sign_up_text_hint" />
 
             <EditText
                 android:id="@+id/fieldBirthDay"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:ems="10"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:ems="10"
                 android:hint="Day"
+                android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="#B8C6C7" />
-
+                android:textColor="@color/sign_up_text"
+                android:textColorHint="@color/sign_up_text_hint" />
 
 
             <EditText
@@ -162,12 +166,13 @@
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:ems="10"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:ems="10"
                 android:hint="Year"
+                android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="#B8C6C7" />
+                android:textColor="@color/sign_up_text"
+                android:textColorHint="@color/sign_up_text_hint" />
 
 
 

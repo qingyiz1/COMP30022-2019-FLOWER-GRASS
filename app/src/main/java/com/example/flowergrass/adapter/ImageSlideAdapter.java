@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import androidx.fragment.app.FragmentActivity;
@@ -45,7 +46,8 @@ public class ImageSlideAdapter extends PagerAdapter {
 
         ImageView mImageView = view.findViewById(R.id.image_display);
         mImageView.setImageResource(images[position]);
-
+        TextView imgName = view.findViewById(R.id.img_name);
+        imgName.setText("okok");
         container.addView(view);
         return view;
     }

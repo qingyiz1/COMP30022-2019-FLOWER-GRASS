@@ -4,6 +4,7 @@ package com.example.flowergrass.fragments;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -35,7 +37,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.flowergrass.Homepage;
 import com.example.flowergrass.NewPostActivity;
 import com.example.flowergrass.R;
+import com.example.flowergrass.adapter.EventListAdapter;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
+import com.example.flowergrass.data.Event;
 import com.example.flowergrass.data.Product;
 import com.example.flowergrass.utils.CirclePageIndicator;
 import com.example.flowergrass.utils.GlideApp;
@@ -47,12 +51,13 @@ public class HomeFragment extends Fragment {
 
     public static final String ARG_ITEM_ID = "home_fragment";
 
-    private static final long ANIM_VIEWPAGER_DELAY = 5000;
+    private static final long ANIM_VIEWPAGER_DELAY = 10000;
     private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
 
     // UI References
     private ViewPager mViewPager;
-    TextView imgNameTxt;
+    private ListView mEventListView;
+    //TextView imgNameTxt;
     PageIndicator mIndicator;
 
 
@@ -61,9 +66,10 @@ public class HomeFragment extends Fragment {
     //Data - Temporary
     int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
 
-    boolean stopSliding = false;
+
 
     //Sliding Animation
+    boolean stopSliding = false;
     private Runnable animateViewPager;
     private Handler handler;
 
@@ -81,15 +87,31 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg1, container, false);
-        InitImgSlider(view);
-        loadWithGlide(view);
+        Init(view);
+        //loadWithGlide(view,R.id.);
         return view;
     }
 
-    private void InitImgSlider(View view) {
+
+    //Initialise Image slider and EventListView
+    private void Init(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
+        mEventListView = view.findViewById(R.id.EventListView);
+        ArrayList<Event> eventArrayList = new ArrayList<>();
+        Event event1 = new Event("test","monday","this is a test");
+        Event event2 = new Event("test","monday","this is a test");
+        Event event3 = new Event("test","monday","this is a test");
+        Event event4 = new Event("test","monday","this is a test");
+        Event event5 = new Event("test","monday","this is a test");
+        eventArrayList.add(event1);
+        eventArrayList.add(event2);
+        eventArrayList.add(event3);
+        eventArrayList.add(event4);
+        eventArrayList.add(event5);
+
+
+        mEventListView.setAdapter(new EventListAdapter(this.getContext(),R.layout.adapter_view_layout,eventArrayList));
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
-        imgNameTxt = view.findViewById(R.id.img_name);
         mIndicator.setOnPageChangeListener(new PageChangeListener());
     }
 
@@ -116,7 +138,7 @@ public class HomeFragment extends Fragment {
             mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
 
             mIndicator.setViewPager(mViewPager);
-            imgNameTxt.setText("TEST");
+
             runnable(products.length);
             //Re-run callback
             handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
@@ -157,7 +179,7 @@ public class HomeFragment extends Fragment {
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 if (products != null) {
-                    imgNameTxt.setText("TEST");
+
                 }
             }
         }
@@ -176,13 +198,13 @@ public class HomeFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    public void loadWithGlide(View container) {
+    public void loadWithGlide(View container, int ID) {
         // [START storage_load_with_glide]
         // Reference to an image file in Cloud Storage
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/test.jpg");
 
         // ImageView in your Activity
-        ImageView imageView = container.findViewById(R.id.activity_image);
+        ImageView imageView = container.findViewById(ID);
 
         // Download directly from StorageReference using Glide
         // (See MyAppGlideModule for Loader registration)
