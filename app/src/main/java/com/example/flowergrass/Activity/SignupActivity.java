@@ -1,17 +1,22 @@
-package com.example.flowergrass;
+package com.example.flowergrass.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.example.flowergrass.R;
 import com.example.flowergrass.models.userModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,9 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.core.FirestoreClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +33,8 @@ import java.util.Map;
 
 
 public class SignupActivity extends MainActivity {
-    Button signupBtn;
+    Button signupBtn,chooseBtn;
+    ImageView avatar;
     private EditText mEmailField,mPasswordField,mNickName;
     private EditText fieldBirthday,fieldBirthMonth,fieldBirthYear;
     private userModel newUser;
@@ -46,6 +49,8 @@ public class SignupActivity extends MainActivity {
         mAuth = FirebaseAuth.getInstance();
 
         signupBtn = findViewById(R.id.SignUpBtn2);
+        chooseBtn = findViewById(R.id.signup_avator_choose_btn);
+        avatar = findViewById(R.id.signup_avatar_icon);
         mEmailField = findViewById(R.id.fieldEmail2);
         mPasswordField = findViewById(R.id.fieldPassword2);
         mNickName = findViewById(R.id.fieldNickname2);
@@ -53,7 +58,8 @@ public class SignupActivity extends MainActivity {
         fieldBirthMonth = findViewById(R.id.fieldBirthMonth);
         fieldBirthYear = findViewById(R.id.fieldBirthYear);
 
-        findViewById(R.id.SignUpBtn2).setOnClickListener(this);
+        signupBtn.setOnClickListener(this);
+        chooseBtn.setOnClickListener(this);
     }
 
 
@@ -153,8 +159,19 @@ public class SignupActivity extends MainActivity {
         int i = v.getId();
         if (i == R.id.SignUpBtn2) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+        }else if(i == R.id.signup_avator_choose_btn){
+            Intent intent = new Intent(SignupActivity.this,AvatarActivity.class);
+            startActivityForResult(intent,0x01);
 
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0x01 || requestCode==0x02){
+            int id = data.getIntExtra("avatar",0);
+            avatar.setImageResource(id);
+        }
+    }
 }

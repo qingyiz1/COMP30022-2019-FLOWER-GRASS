@@ -1,9 +1,10 @@
-package com.example.flowergrass;
+package com.example.flowergrass.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.flowergrass.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

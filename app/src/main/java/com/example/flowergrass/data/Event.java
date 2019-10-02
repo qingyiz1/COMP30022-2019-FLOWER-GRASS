@@ -8,6 +8,7 @@ public class Event {
     private String details;
     private List<String> comments;
 
+
     public Event(String title, String date,  String details) {
         this.title = title;
         this.date = date;

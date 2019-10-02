@@ -1,4 +1,4 @@
-package com.example.flowergrass;
+package com.example.flowergrass.Activity;
 
 
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.flowergrass.R;
 import com.example.flowergrass.fragments.FourthFragment;
 import com.example.flowergrass.fragments.HomeFragment;
 import com.example.flowergrass.fragments.SecondFragment;

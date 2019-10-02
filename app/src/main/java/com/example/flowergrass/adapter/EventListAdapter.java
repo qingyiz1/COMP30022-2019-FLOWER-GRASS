@@ -35,7 +35,6 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     /**
      * Holds variables in a View
@@ -103,26 +102,5 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     }
 
 
-    public void getData(){
-        db.collection("events")
-                .orderBy("dateCreated").limit(5)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
 
-                        Map<String,Object> events = new HashMap<>();
-                        for (QueryDocumentSnapshot doc : value) {
-                            if (doc.get("name") != null) {
-                                events = doc.getData();
-                            }
-                        }
-                        Log.d(TAG, "Current events in : " + events.toString());
-                    }
-                });
-    }
 }

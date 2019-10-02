@@ -1,25 +1,20 @@
 package com.example.flowergrass.fragments;
 
 
-
-import java.io.IOException;
-import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONObject;
-
-
-
-import android.app.Activity;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,21 +24,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
-
-import com.example.flowergrass.Homepage;
-import com.example.flowergrass.NewPostActivity;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.EventListAdapter;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
 import com.example.flowergrass.data.Event;
-import com.example.flowergrass.data.Product;
 import com.example.flowergrass.utils.CirclePageIndicator;
 import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -53,6 +50,9 @@ public class HomeFragment extends Fragment {
 
     private static final long ANIM_VIEWPAGER_DELAY = 10000;
     private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
+    private static final String TAG = "HOME_FRAGMENT";
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // UI References
     private ViewPager mViewPager;
@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
 
     //Data - Temporary
     int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
-
+    ArrayList<Event> events = new ArrayList<>();
 
 
     //Sliding Animation
@@ -97,20 +97,7 @@ public class HomeFragment extends Fragment {
     private void Init(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
         mEventListView = view.findViewById(R.id.EventListView);
-        ArrayList<Event> eventArrayList = new ArrayList<>();
-        Event event1 = new Event("test","monday","this is a test");
-        Event event2 = new Event("test","monday","this is a test");
-        Event event3 = new Event("test","monday","this is a test");
-        Event event4 = new Event("test","monday","this is a test");
-        Event event5 = new Event("test","monday","this is a test");
-        eventArrayList.add(event1);
-        eventArrayList.add(event2);
-        eventArrayList.add(event3);
-        eventArrayList.add(event4);
-        eventArrayList.add(event5);
-
-
-        mEventListView.setAdapter(new EventListAdapter(this.getContext(),R.layout.adapter_view_layout,eventArrayList));
+        getData();
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         mIndicator.setOnPageChangeListener(new PageChangeListener());
     }
@@ -214,6 +201,29 @@ public class HomeFragment extends Fragment {
         // [END storage_load_with_glide]
     }
 
+    public void getData(){
+        db.collection("events")
+                .orderBy("dateCreated").limit(5)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
 
+                        for (QueryDocumentSnapshot doc : value) {
+                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
+
+                            events.add(new Event(doc.getString("title"),date.toDate().toString(),doc.getString("details")));
+
+                        }
+                        mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,events));
+                        Log.d(TAG, "Current events in : " + events.toString());
+                    }
+
+                });
+    }
 
 }

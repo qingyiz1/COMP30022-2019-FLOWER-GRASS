@@ -5,10 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignupActivity"
-    android:background="@drawable/bg_sign_up"
+    tools:context=".Activity.SignupActivity"
+    android:background="@drawable/signup_bg1"
 
     >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LinearLayoutSignUp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="-135dp">
+
+        <ImageView
+            android:id="@+id/signup_avatar_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/avatar_boy"/>
+
+        <Button
+            android:id="@+id/signup_avator_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#489145"
+            android:text="Choose" />
+
+    </LinearLayout>
 
 
 
@@ -17,8 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-
-        android:orientation="vertical">
+        android:id="@+id/LinearLayoutSignUp"
+        android:orientation="vertical"
+        android:paddingTop="140dp">
 
         <LinearLayout
             android:layout_width="match_parent"
