@@ -3,16 +3,24 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100">
+    android:weightSum="100"
+    >
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/avatar_boy"
+        />
 
     <TextView
         android:gravity="center"
         android:textAlignment="center"
         android:text="EventName"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
         android:id="@+id/EventName"
+        android:textSize="20dp"
+        android:textColor="@color/whitesmoke"
         android:layout_weight="66.6"/>
 
     <LinearLayout
@@ -29,16 +37,18 @@
                 android:gravity="center"
                 android:text="EventCreator"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
+                android:textColor="@color/whitesmoke"
                 android:id="@+id/EventCreator"/>
 
             <TextView
                 android:gravity="center"
                 android:text="EventCreator"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
+                android:textColor="@color/whitesmoke"
                 android:id="@+id/EventDate"
                 />
 
@@ -48,7 +58,8 @@
             android:gravity="center"
             android:text="EventDetails"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
+                android:textColor="@color/whitesmoke"
             android:id="@+id/EventDetails"
             android:layout_below="@+id/EventCreator"/>
     </LinearLayout>

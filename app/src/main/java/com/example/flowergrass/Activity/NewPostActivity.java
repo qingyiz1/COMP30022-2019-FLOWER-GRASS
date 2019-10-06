@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.example.flowergrass.R;
 import com.example.flowergrass.models.Post;
 import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,7 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class NewPostActivity extends MainActivity {
+public class NewPostActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "NewPostActivity";
     private static final String REQUIRED = "Required";
@@ -57,7 +58,7 @@ public class NewPostActivity extends MainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-
+        Log.d(TAG,"what the fk is gong on");
 
         mTitleField = findViewById(R.id.fieldTitle);
         mBodyField = findViewById(R.id.fieldBody);
@@ -157,17 +158,24 @@ public class NewPostActivity extends MainActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && data.getData() != null){
             filePath = data.getData();
-
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
                 uploadImg.setImageBitmap(bitmap);
             }catch (IOException e){
                 e.printStackTrace();
             }
-
-
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(NewPostActivity.this,Homepage.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+
+    }
+
 
     @Override
     public void onClick(View view){

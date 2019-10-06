@@ -2,6 +2,11 @@
     <string name="group_name">Flower&amp;Grass</string>
     <string name="app_name">Family</string>
 
+    <string-array name="title_spinner">
+        <item>Item</item>
+        <item>Event</item>
+
+    </string-array>
     <string name="create_new">Create New</string>
     <string name="action_settings">Settings</string>
     <string name="title">Title</string>

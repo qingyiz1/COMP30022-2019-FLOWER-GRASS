@@ -55,7 +55,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //get the persons information
+        //get event information
         String title = getItem(position).getTitle();
         String date = getItem(position).getDate();
         String details = getItem(position).getDetails();
@@ -63,12 +63,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         //Create the Event object with the information
         Event event = new Event(title,date,details);
 
-        //create the view result for showing the animation
-        final View result;
-
         //ViewHolder object
         ViewHolder holder;
-
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -77,21 +73,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             holder.name = convertView.findViewById(R.id.EventName);
             holder.date = convertView.findViewById(R.id.EventDate);
             holder.details = convertView.findViewById(R.id.EventDetails);
-
-            result = convertView;
-
             convertView.setTag(holder);
         }
-        else{
+        else {
             holder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
-
-
-        Animation animation = AnimationUtils.loadAnimation(mContext,
-                (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
-        result.startAnimation(animation);
-        lastPosition = position;
 
         holder.name.setText(event.getTitle());
         holder.date.setText(event.getDate());

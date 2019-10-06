@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +42,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -104,11 +108,12 @@ public class HomeFragment extends Fragment {
 
     public void runnable(final int size) {
         handler = new Handler();
-        animateViewPager = new Runnable() {
+        new Thread(animateViewPager = new Runnable() {
             public void run() {
                 if (!stopSliding) {
                     if (mViewPager.getCurrentItem() == size - 1) {
                         mViewPager.setCurrentItem(0);
+
                     } else {
                         mViewPager.setCurrentItem(
                                 mViewPager.getCurrentItem() + 1, true);
@@ -116,19 +121,18 @@ public class HomeFragment extends Fragment {
                     handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
                 }
             }
-        };
+        }).start();
     }
 
 
     @Override
     public void onResume() {
-            mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
+        mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
 
-            mIndicator.setViewPager(mViewPager);
-
-            runnable(products.length);
-            //Re-run callback
-            handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+        mIndicator.setViewPager(mViewPager);
+        runnable(products.length);
+        //Re-run callback
+        handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
 
         super.onResume();
     }
@@ -203,7 +207,7 @@ public class HomeFragment extends Fragment {
 
     public void getData(){
         db.collection("events")
-                .orderBy("dateCreated").limit(5)
+                .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,

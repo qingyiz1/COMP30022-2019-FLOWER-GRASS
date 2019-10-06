@@ -41,12 +41,14 @@ public class SignupActivity extends MainActivity {
     private List<String> birthday = new ArrayList<>();
     private String userUID;
     protected static final String TAG = "SignUpActivity";
+    private int currentImgId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
+        currentImgId = R.drawable.avatar_boy;
 
         signupBtn = findViewById(R.id.SignUpBtn2);
         chooseBtn = findViewById(R.id.signup_avator_choose_btn);
@@ -162,7 +164,6 @@ public class SignupActivity extends MainActivity {
         }else if(i == R.id.signup_avator_choose_btn){
             Intent intent = new Intent(SignupActivity.this,AvatarActivity.class);
             startActivityForResult(intent,0x01);
-
         }
     }
 
@@ -170,7 +171,10 @@ public class SignupActivity extends MainActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 0x01 || requestCode==0x02){
-            int id = data.getIntExtra("avatar",0);
+            int id = data.getIntExtra("avatar",currentImgId);
+            if(id != currentImgId){
+                currentImgId = id;
+            }
             avatar.setImageResource(id);
         }
     }

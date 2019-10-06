@@ -19,6 +19,7 @@ import java.util.Map;
 public class AvatarActivity extends AppCompatActivity {
     GridView gridView;
     int[] avatars = new int[]{R.drawable.avatar_boy,R.drawable.avatar_girl,R.drawable.avatar_girl2,R.drawable.avatar_girl2,R.drawable.avatar_girl3,R.drawable.avatar_girl4,R.drawable.avatar_man};
+    boolean isClicked = false;
 
 
 
@@ -42,12 +43,17 @@ public class AvatarActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                isClicked = true;
                 Intent intent = new Intent();
                 intent.putExtra("avatar",avatars[i]);
                 setResult(0x02,intent);
                 finish();
             }
         });
+
+        if(!isClicked){
+            setResult(0x02,getIntent());
+        }
 
     }
 }

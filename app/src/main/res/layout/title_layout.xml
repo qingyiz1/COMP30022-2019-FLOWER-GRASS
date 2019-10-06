@@ -16,13 +16,18 @@
         android:layout_toStartOf="@id/title_text_tv"
         android:textColor="@color/white"/>
 
-    <ImageView
-        android:id="@+id/title_imv"
+    <Spinner
+        android:id="@+id/title_spinner"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:contentDescription="@string/create_new"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_add_new_white" />
+        android:dropDownWidth="60dp"
+        android:dropDownVerticalOffset="30dp"
+
+        android:background="@drawable/ic_add_new_white"
+        android:contentDescription="@string/create_new"
+
+        />
 </RelativeLayout>

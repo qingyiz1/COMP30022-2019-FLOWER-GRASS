@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             Intent intent= new Intent(getApplicationContext(),Homepage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-
+            finish();
         }
     }
 
@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             updateUI(user);
 
                             // Direct to Profile page
-                            Intent intent= new Intent(getApplicationContext(),Homepage.class);
+                            Intent intent= new Intent(MainActivity.this,Homepage.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -195,15 +195,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.SignUpBtn) {
+            // start SignUp activity
             Intent intent= new Intent(getApplicationContext(),SignupActivity.class);
             startActivity(intent);
-            finish();
-            //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.LogInBtn) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-
-
-
         }
 
 //        } else if (i == R.id.signOutButton) {

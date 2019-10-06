@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -26,7 +29,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
 
 
     // Initialise Top Bar
-    private ImageView titleImv;
+    private Spinner titleSpinner;
     private TextView titleTv;
 
     // Dine four Fragment objects
@@ -74,13 +77,30 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
      */
     private void initView() {
         // Title bar
-        titleImv = findViewById(R.id.title_imv);
-        titleImv.setOnClickListener(new View.OnClickListener() {
+        titleSpinner = findViewById(R.id.title_spinner);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(Homepage.this,R.layout.simple_spinner_item,getResources().getStringArray(R.array.title_spinner));
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        titleSpinner.setAdapter(spinnerAdapter);
+
+        titleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Homepage.this, NewPostActivity.class));
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 1) {
+                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+                    startActivity(intent);
+                } else if (i == 2) {
+                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
+
         titleTv = findViewById(R.id.title_text_tv);
         titleTv.setText("Activity");
 

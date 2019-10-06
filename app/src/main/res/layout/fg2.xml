@@ -7,6 +7,13 @@
     android:gravity="center"
     android:background="@color/aquamarine"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/avatar_boy"
+        android:id="@+id/timeline_img"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
