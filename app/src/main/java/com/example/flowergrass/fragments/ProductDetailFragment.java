@@ -1,10 +1,6 @@
 package com.example.flowergrass.fragments;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.data.Product;
+import com.example.flowergrass.data.Item;
 
 
 public class ProductDetailFragment extends Fragment {
@@ -27,7 +23,7 @@ public class ProductDetailFragment extends Fragment {
 
 
 
-    Product product;
+    Item product;
 
     public static final String ARG_ITEM_ID = "pdt_detail_fragment";
 
@@ -66,9 +62,9 @@ public class ProductDetailFragment extends Fragment {
 
 
 
-    private void setProductItem(Product resultProduct) {
+    private void setProductItem(Item resultProduct) {
         pdtNameTxt.setText("" + resultProduct.getTitle());
-        pdtIdTxt.setText("Product Id: " + resultProduct.getId());
+        pdtIdTxt.setText("Item Id: " + resultProduct.getId());
 
     }
 }

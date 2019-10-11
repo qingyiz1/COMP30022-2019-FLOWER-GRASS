@@ -48,6 +48,7 @@ public class ImageSlideAdapter extends PagerAdapter {
         mImageView.setImageResource(images[position]);
         TextView imgName = view.findViewById(R.id.img_name);
         imgName.setText("okok");
+
         container.addView(view);
         return view;
     }

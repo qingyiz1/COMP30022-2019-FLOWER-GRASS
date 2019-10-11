@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AvatarActivity"></activity>
+
+        <activity android:name=".Activity.NewEventActivity"></activity>
+        <activity android:name=".Activity.AvatarActivity" />
         <activity android:name=".fragments.EventDetailFragment" />
         <activity android:name=".Activity.Homepage" />
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.ProfileActivity" />
-        <activity android:name=".Activity.NewPostActivity" />
+        <activity android:name=".Activity.NewItemActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

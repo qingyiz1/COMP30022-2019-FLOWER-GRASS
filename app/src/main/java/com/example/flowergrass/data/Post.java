@@ -4,14 +4,16 @@ import java.util.List;
 
 public class Post {
     private String id;
+    private String author;
     private String title;
     private String date;
     private String content;
     private List<String> comments;
 
 
-    public Post(String id,String title, String date, String content) {
+    public Post(String id,String author,String title, String date, String content) {
         this.id = id;
+        this.author = author;
         this.title = title;
         this.date = date;
         this.content = content;
@@ -21,6 +23,14 @@ public class Post {
 
     public String getDate() {
         return date;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public void setDate(String date) {

@@ -38,9 +38,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class NewPostActivity extends BaseActivity implements View.OnClickListener {
+public class NewItemActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final String TAG = "NewPostActivity";
+    private static final String TAG = "NewItemActivity";
     private static final String REQUIRED = "Required";
     private static final int PICK_IMAGE_REQUEST = 234;
 
@@ -57,8 +57,8 @@ public class NewPostActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
-        Log.d(TAG,"what the fk is gong on");
+        setContentView(R.layout.activity_new_item);
+
 
         mTitleField = findViewById(R.id.fieldTitle);
         mBodyField = findViewById(R.id.fieldBody);
@@ -169,11 +169,10 @@ public class NewPostActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(NewPostActivity.this,Homepage.class);
+        Intent intent = new Intent(NewItemActivity.this,Homepage.class);
         startActivity(intent);
         finish();
         super.onBackPressed();
-
     }
 
 

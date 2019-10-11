@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.flowergrass.R;
+import com.example.flowergrass.adapter.SpinnerAdapter;
 import com.example.flowergrass.fragments.FourthFragment;
 import com.example.flowergrass.fragments.HomeFragment;
 import com.example.flowergrass.fragments.SecondFragment;
@@ -63,6 +65,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
     // Define FragmentManager
     private FragmentManager fragmentManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,19 +81,21 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
     private void initView() {
         // Title bar
         titleSpinner = findViewById(R.id.title_spinner);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(Homepage.this,R.layout.simple_spinner_item,getResources().getStringArray(R.array.title_spinner));
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(Homepage.this,R.layout.simple_spinner_item,getResources().getStringArray(R.array.title_spinner),0);
         spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         titleSpinner.setAdapter(spinnerAdapter);
 
         titleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
-                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                if (adapterView.getItemAtPosition(position).equals("Create New Item")) {
+                    Intent intent = new Intent(Homepage.this,NewItemActivity.class);
                     startActivity(intent);
-                } else if (i == 2) {
-                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+                    titleSpinner.setSelection(0,false);
+                }else if (adapterView.getItemAtPosition(position).equals("Create New Event")) {
+                    Intent intent = new Intent(Homepage.this,NewEventActivity.class);
                     startActivity(intent);
+                    titleSpinner.setSelection(0,false);
                 }
             }
 

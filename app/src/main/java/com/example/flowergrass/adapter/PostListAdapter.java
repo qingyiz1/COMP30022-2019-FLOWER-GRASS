@@ -58,12 +58,13 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     public View getView(int position, View convertView, ViewGroup parent) {
         //get event information
         String id = getItem(position).getId();
+        String author = getItem(position).getAuthor();
         String title = getItem(position).getTitle();
         String date = getItem(position).getDate();
         String content = getItem(position).getContent();
 
         //Create the Event object with the information
-        Event event = new Event(id,title,date,content);
+        Event event = new Event(id,author,title,date,content);
 
         //ViewHolder object
         ViewHolder holder;

@@ -5,6 +5,8 @@
     android:layout_height="30dp"
     android:textColor="@color/whitesmoke"
     android:ellipsize="marquee"
+    android:textSize="20dp"
+    android:textStyle="bold"
     android:background="@color/colorPrimaryDark"
     android:textAlignment="center"
     android:singleLine="true" />
