@@ -56,12 +56,13 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get event information
+        String id = getItem(position).getId();
         String title = getItem(position).getTitle();
         String date = getItem(position).getDate();
-        String details = getItem(position).getDetails();
+        String details = getItem(position).getContent();
 
         //Create the Event object with the information
-        Event event = new Event(title,date,details);
+        Event event = new Event(id,title,date,details);
 
         //ViewHolder object
         ViewHolder holder;
@@ -81,7 +82,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
         holder.name.setText(event.getTitle());
         holder.date.setText(event.getDate());
-        holder.details.setText(event.getDetails());
+        holder.details.setText(event.getContent());
 
 
         return convertView;

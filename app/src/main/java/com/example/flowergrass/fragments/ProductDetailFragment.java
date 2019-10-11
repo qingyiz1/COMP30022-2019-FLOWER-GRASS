@@ -67,7 +67,7 @@ public class ProductDetailFragment extends Fragment {
 
 
     private void setProductItem(Product resultProduct) {
-        pdtNameTxt.setText("" + resultProduct.getName());
+        pdtNameTxt.setText("" + resultProduct.getTitle());
         pdtIdTxt.setText("Product Id: " + resultProduct.getId());
 
     }

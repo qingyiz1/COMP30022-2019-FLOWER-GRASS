@@ -10,24 +10,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.EventListAdapter;
+import com.example.flowergrass.adapter.PostListAdapter;
 import com.example.flowergrass.data.Event;
-import com.example.flowergrass.utils.CirclePageIndicator;
+import com.example.flowergrass.data.Post;
+import com.example.flowergrass.data.Product;
 import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
 import com.google.firebase.Timestamp;
@@ -68,7 +63,7 @@ public class SecondFragment extends Fragment {
 
     //Data - Temporary
     int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
-    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<Post> posts = new ArrayList<>();
 
 
     FragmentActivity activity;
@@ -174,42 +169,25 @@ public class SecondFragment extends Fragment {
                         }
 
                         for (QueryDocumentSnapshot doc : value) {
-                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
+                            Log.d(TAG,"Problem:"+doc.getData().get("dateCreated"));
+                            Timestamp date = (Timestamp) doc.getData().get("dateCreated");
 
-                            events.add(new Event(doc.getString("title"),date.toDate().toString(),doc.getString("details")));
+                            if(doc.getString("imageUrl") != null){
+                                //posts.add(new Product(doc.getId(),doc.getString("title"),date.toDate().toString(),doc.getString("content"),doc.getString("imageUrl")));
+                            }else{
+                                posts.add(new Event(doc.getId(),doc.getString("title"),date.toDate().toString(),doc.getString("content")));
+
+                            }
 
                         }
-                        mItemListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,events));
-                        Log.d(TAG, "Current events in : " + events.toString());
+                        mItemListView.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,posts));
+                        Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 
                 });
     }
 
-    public void getProductsData(){
-        db.collection("events")
-                .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
 
-                        for (QueryDocumentSnapshot doc : value) {
-                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
-
-                            events.add(new Event(doc.getString("title"),date.toDate().toString(),doc.getString("details")));
-
-                        }
-                        mItemListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,events));
-                        Log.d(TAG, "Current events in : " + events.toString());
-                    }
-
-                });
-    }
 
 
 }

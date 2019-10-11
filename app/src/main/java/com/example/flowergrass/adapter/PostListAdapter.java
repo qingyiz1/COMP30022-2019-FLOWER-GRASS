@@ -1,23 +1,37 @@
 package com.example.flowergrass.adapter;
 
 import android.content.Context;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.flowergrass.R;
 import com.example.flowergrass.data.Event;
+import com.example.flowergrass.data.Post;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-public class ItemListAdapter extends ArrayAdapter<Event> {
+public class PostListAdapter extends ArrayAdapter<Post> {
 
-    private static final String TAG = "EventListAdapter";
+    private static final String TAG = "PostListAdapter";
 
     private Context mContext;
     private int mResource;
@@ -33,7 +47,7 @@ public class ItemListAdapter extends ArrayAdapter<Event> {
     }
 
 
-    public ItemListAdapter(Context context, int resource, ArrayList<Event> objects) {
+    public PostListAdapter(Context context, int resource, ArrayList<Post> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -46,10 +60,10 @@ public class ItemListAdapter extends ArrayAdapter<Event> {
         String id = getItem(position).getId();
         String title = getItem(position).getTitle();
         String date = getItem(position).getDate();
-        String details = getItem(position).getContent();
+        String content = getItem(position).getContent();
 
         //Create the Event object with the information
-        Event event = new Event(id,title,date,details);
+        Event event = new Event(id,title,date,content);
 
         //ViewHolder object
         ViewHolder holder;
