@@ -6,5 +6,5 @@
     android:textColor="@color/whitesmoke"
     android:ellipsize="marquee"
     android:background="@color/colorPrimaryDark"
-    android:layout_marginLeft="10dp"
+    android:textAlignment="center"
     android:singleLine="true" />
