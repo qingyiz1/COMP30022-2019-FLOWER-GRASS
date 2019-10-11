@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary1">#008577</color>
+
     <color name="colorPrimaryDark1">#00574B</color>
     <color name="colorAccent1">#D81B60</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="bg_color">#EDEDED</color>
+    <color name="bg_color">#1F1F1F</color>
+    <color name="sign_up_text">#1E4220</color>
+    <color name="sign_up_text_hint">#F3F7B0</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="view_divider_color">#BABABA</color>
+    <color name="view_divider_color_2">#DADADA</color>
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>
     <color name="help_button_view">#ffcccccc</color>

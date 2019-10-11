@@ -4,19 +4,30 @@
     android:layout_height="56dp"
     android:background="@color/colorPrimaryDark"
     android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/title_imv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:src="@android:drawable/ic_menu_more" />
+
     <TextView
         android:id="@+id/title_text_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Family"
-        android:textSize="20sp"
-        android:textColor="@color/bg_color"/>
+        android:textStyle="bold"
+        android:text="@string/app_name"
+        android:textSize="25sp"
+        android:layout_toStartOf="@id/title_text_tv"
+        android:textColor="@color/white"/>
+
+    <Spinner
+        android:id="@+id/title_spinner"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="10dp"
+        android:dropDownWidth="60dp"
+        android:dropDownVerticalOffset="30dp"
+
+        android:background="@drawable/ic_add_new_white"
+        android:contentDescription="@string/create_new"
+
+        />
 </RelativeLayout>

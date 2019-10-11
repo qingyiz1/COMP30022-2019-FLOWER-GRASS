@@ -1,35 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Main page-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="@color/aquamarine"
-    android:orientation="vertical">
+    android:padding="10dp"
+    tools:context=".Activity.MainActivity"
+    android:background="@color/bg_color">
+
+    <RelativeLayout
+        android:id="@+id/img_slideshow_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/img_border" >
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp" />
 
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/MP_button"
-            android:layout_width="match_parent"
+        <com.example.flowergrass.utils.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Test Button" />
+            android:layout_alignBottom="@+id/view_pager"
+            android:padding="10dip" />
+    </RelativeLayout>
 
-    </LinearLayout>
+    <View
+        android:id="@+id/div_a"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/img_slideshow_layout"
+        android:background="@color/view_divider_color" >
+
+    </View>
+
+    <View
+        android:id="@+id/div_b"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/div_a"
+        android:background="@color/darkorchid" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/div_b"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Main Page"
-            android:textSize="22sp"/>
+            android:text="What is going on"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
 
+        <ListView
+            android:id="@+id/EventListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:divider="@color/palevioletred"
+            android:dividerHeight="@dimen/default_circle_indicator_stroke_width"
+            android:textFilterEnabled="false" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

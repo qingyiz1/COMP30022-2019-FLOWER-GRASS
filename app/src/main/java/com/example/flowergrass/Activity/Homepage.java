@@ -1,28 +1,39 @@
-package com.example.flowergrass;
+package com.example.flowergrass.Activity;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.flowergrass.R;
+import com.example.flowergrass.fragments.FourthFragment;
+import com.example.flowergrass.fragments.HomeFragment;
+import com.example.flowergrass.fragments.SecondFragment;
+import com.example.flowergrass.fragments.ThirdFragment;
+
+
 
 public class Homepage extends FragmentActivity implements View.OnClickListener {
+
+
     // Initialise Top Bar
-    private ImageView titleLeftImv;
+    private Spinner titleSpinner;
     private TextView titleTv;
 
     // Dine four Fragment objects
-    private FirstFragment fg1;
+    private HomeFragment fg1;
     private SecondFragment fg2;
     private ThirdFragment fg3;
     private FourthFragment fg4;
@@ -59,21 +70,39 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView();
         setChioceItem(0); // Set default Fragment
+
     }
     /**
      * Initialisation
      */
     private void initView() {
         // Title bar
-        titleLeftImv = findViewById(R.id.title_imv);
-        titleLeftImv.setOnClickListener(new View.OnClickListener() {
+        titleSpinner = findViewById(R.id.title_spinner);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(Homepage.this,R.layout.simple_spinner_item,getResources().getStringArray(R.array.title_spinner));
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        titleSpinner.setAdapter(spinnerAdapter);
+
+        titleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Homepage.this, SignupActivity.class));
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 1) {
+                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+                    startActivity(intent);
+                } else if (i == 2) {
+                    Intent intent= new Intent(Homepage.this,NewPostActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
+
         titleTv = findViewById(R.id.title_text_tv);
-        titleTv.setText("Main Page");
+        titleTv.setText("Activity");
 
         // Bottom Nav Bar
         firstImage = findViewById(R.id.first_image);
@@ -94,6 +123,10 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         fourthLayout.setOnClickListener(Homepage.this);
     }
 
+
+    /**
+     * Bottom tab selection
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -130,10 +163,10 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // firstImage.setImageResource(R.drawable.XXXX);
                 firstText.setTextColor(dark);
                 firstLayout.setBackgroundColor(gray);
-
+                titleTv.setText("Activity");
                 // Create fragment and add to view if null
                 if (fg1 == null) {
-                    fg1 = new FirstFragment();
+                    fg1 = new HomeFragment();
                     fragmentTransaction.add(R.id.content, fg1);
                 } else {
                     // Show fragment if exists
@@ -145,6 +178,8 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // secondImage.setImageResource(R.drawable.XXXX);
                 secondText.setTextColor(dark);
                 secondLayout.setBackgroundColor(gray);
+                titleTv.setText("Timeline");
+
                 if (fg2 == null) {
                     fg2 = new SecondFragment();
                     fragmentTransaction.add(R.id.content, fg2);
@@ -157,6 +192,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // thirdImage.setImageResource(R.drawable.XXXX);
                 thirdText.setTextColor(dark);
                 thirdLayout.setBackgroundColor(gray);
+                titleTv.setText("Message");
                 if (fg3 == null) {
                     fg3 = new ThirdFragment();
                     fragmentTransaction.add(R.id.content, fg3);
@@ -169,6 +205,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 // fourthImage.setImageResource(R.drawable.XXXX);
                 fourthText.setTextColor(dark);
                 fourthLayout.setBackgroundColor(gray);
+                titleTv.setText("Me");
                 if (fg4 == null) {
                     fg4 = new FourthFragment();
                     fragmentTransaction.add(R.id.content, fg4);

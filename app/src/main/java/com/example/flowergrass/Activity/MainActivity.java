@@ -1,70 +1,25 @@
-package com.example.flowergrass;
+package com.example.flowergrass.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
+
+import com.example.flowergrass.R;
+import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-
-    @VisibleForTesting
-    public ProgressDialog mProgressDialog;
-
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
-        }
-
-        mProgressDialog.show();
-    }
-
-    public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    public void hideKeyboard(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        hideProgressDialog();
-    }
-
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     protected static final String TAG = "EmailPassword";
 
@@ -72,10 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
-
-    // [START declare_auth]
-    private FirebaseAuth mAuth;
-    // [END declare_auth]
+    public userModel newUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,11 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.SignUpBtn).setOnClickListener(this);
         //findViewById(R.id.signOutButton).setOnClickListener(this);
         //findViewById(R.id.verifyEmailButton).setOnClickListener(this);
+        checkUserState();
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
     }
 
     // [START on_start_check_user]
@@ -112,6 +61,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // [END on_start_check_user]
 
 
+    private void checkUserState(){
+        if(mAuth.getCurrentUser() != null){
+            Intent intent= new Intent(getApplicationContext(),Homepage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
@@ -133,8 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             updateUI(user);
 
                             // Direct to Profile page
-                            Intent intent= new Intent(getApplicationContext(),Homepage.class);
+                            Intent intent= new Intent(MainActivity.this,Homepage.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -237,12 +195,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.SignUpBtn) {
+            // start SignUp activity
             Intent intent= new Intent(getApplicationContext(),SignupActivity.class);
             startActivity(intent);
-            //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.LogInBtn) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-
         }
 
 //        } else if (i == R.id.signOutButton) {
