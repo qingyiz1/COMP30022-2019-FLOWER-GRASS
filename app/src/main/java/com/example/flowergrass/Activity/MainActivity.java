@@ -2,6 +2,8 @@ package com.example.flowergrass.Activity;
 
 import androidx.annotation.NonNull;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -94,10 +96,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 
-                            // Direct to Profile page
-                            Intent intent= new Intent(MainActivity.this,Homepage.class);
-                            startActivity(intent);
-                            finish();
+                            new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle("Success!")
+                                    .setMessage("Successfully logged in")
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Direct to Homepage
+                                            Intent intent= new Intent(MainActivity.this,Homepage.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    //.setNegativeButton(android.R.string.no, null)
+                                    .setIcon(R.drawable.ic_create_success)
+                                    .show();
+
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

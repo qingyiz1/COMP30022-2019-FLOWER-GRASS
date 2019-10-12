@@ -3,6 +3,8 @@ package com.example.flowergrass.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -104,9 +106,24 @@ public class SignupActivity extends MainActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             userUID = mAuth.getUid();
                             updateDatabase(userUID);
-                            Intent intent = new Intent(SignupActivity.this,Homepage.class);
-                            startActivity(intent);
-                            finish();
+
+                            new AlertDialog.Builder(SignupActivity.this)
+                                    .setTitle("Success!")
+                                    .setMessage("New account Successfully created!")
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(SignupActivity.this,Homepage.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    //.setNegativeButton(android.R.string.no, null)
+                                    .setIcon(R.drawable.ic_create_success)
+                                    .show();
+
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
