@@ -2,6 +2,9 @@ package com.example.flowergrass.Activity;
 
 import androidx.annotation.NonNull;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +72,22 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
+                        new AlertDialog.Builder(NewEventActivity.this)
+                                .setTitle("Success!")
+                                .setMessage("New event successfully created!")
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                })
+
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                //.setNegativeButton(android.R.string.no, null)
+                                .setIcon(R.drawable.ic_create_success)
+                                .show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
