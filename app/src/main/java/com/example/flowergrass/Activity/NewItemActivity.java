@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.example.flowergrass.R;
 import com.example.flowergrass.models.Post;
-import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,7 +47,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
     private EditText mTitleField;
     private EditText mBodyField;
     private Post post;
-    private userModel currentUser;
+    private UserModel currentUser;
     private Button chooseBtn,uploadBtn,submitBtn;
     private ImageView uploadImg;
     UploadTask uploadTask;
@@ -69,7 +69,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
         chooseBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
         submitBtn.setOnClickListener(this);
-        currentUser = new userModel();
+        currentUser = new UserModel();
         currentUser.getNickname();
 
     }

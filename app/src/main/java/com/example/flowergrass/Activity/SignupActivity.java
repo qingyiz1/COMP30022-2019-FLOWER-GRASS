@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +15,7 @@ import android.widget.Toast;
 
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.DataModel.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,9 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class SignupActivity extends MainActivity {
@@ -37,7 +33,7 @@ public class SignupActivity extends MainActivity {
     ImageView avatar;
     private EditText mEmailField,mPasswordField,mNickName;
     private EditText fieldBirthday,fieldBirthMonth,fieldBirthYear;
-    private userModel newUser;
+    private UserModel newUser;
     private List<String> birthday = new ArrayList<>();
     private String userUID;
     protected static final String TAG = "SignUpActivity";
@@ -69,17 +65,12 @@ public class SignupActivity extends MainActivity {
         birthday.add(fieldBirthMonth.getText().toString());
         birthday.add(fieldBirthday.getText().toString());
         birthday.add(fieldBirthYear.getText().toString());
-        this.newUser = new userModel(birthday,mEmailField.getText().toString(),mNickName.getText().toString(), Timestamp.now());
+        this.newUser = new UserModel(currentImgId,birthday,mEmailField.getText().toString(),mNickName.getText().toString(), Timestamp.now());
 
-        // Create a new user with a first and last name
-        Map<String, Object> newUser = new HashMap<>();
-        newUser.put("Birthday", this.newUser.birthday.get(0)+"/"+ this.newUser.birthday.get(1)+"/"+ this.newUser.birthday.get(2));
-        newUser.put("Email", this.newUser.email);
-        newUser.put("Nickname", this.newUser.nickName);
-        newUser.put("dateCreated",this.newUser.dateCreated);
+
 
         db.collection("users").document(filePath)
-                .set(newUser)
+                .set(newUser.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.data.Item;
+import com.example.flowergrass.DataModel.Item;
 
 
 public class ProductDetailFragment extends Fragment {

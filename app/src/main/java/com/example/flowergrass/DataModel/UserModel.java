@@ -1,14 +1,11 @@
-package com.example.flowergrass.models;
+package com.example.flowergrass.DataModel;
 
 
 // [START blog_user_class]
 
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,25 +14,27 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class userModel extends BaseActivity {
+public class UserModel extends BaseActivity {
 
     public List<String> birthday;
     public String email;
     public String nickName;
-    protected static final String TAG = "userModel";
+    protected static final String TAG = "UserModel";
     public Timestamp dateCreated;
+    private int avatarID;
 
 
-    public userModel() {
-        // Default constructor required for calls to DataSnapshot.getValue(userModel.class)
+    public UserModel() {
+        // Default constructor required for calls to DataSnapshot.getValue(UserModel.class)
     }
 
-    public userModel(List<String> birthday, String email, String nickName, Timestamp dateCreated) {
+    public UserModel(int avatarID,List<String> birthday, String email, String nickName, Timestamp dateCreated) {
+        this.avatarID = avatarID;
         this.birthday = birthday;
         this.email = email;
         this.nickName = nickName;
@@ -68,6 +67,19 @@ public class userModel extends BaseActivity {
         });
 
     }
+
+    public Map<String, Object> toMap() {
+        // Create a new user with a first and last name
+        Map<String, Object> newUser = new HashMap<>();
+        newUser.put("Birthday", this.birthday.get(0)+"/"+ this.birthday.get(1)+"/"+ this.birthday.get(2));
+        newUser.put("avatarID",this.avatarID);
+        newUser.put("Email", this.email);
+        newUser.put("Nickname", this.nickName);
+        newUser.put("dateCreated",this.dateCreated);
+        return newUser;
+    }
+
+
 
 
     public void setNickName(String nickName){

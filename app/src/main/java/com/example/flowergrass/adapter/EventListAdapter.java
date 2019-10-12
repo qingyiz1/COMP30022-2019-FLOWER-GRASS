@@ -2,30 +2,19 @@ package com.example.flowergrass.adapter;
 
 import android.content.Context;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.data.Event;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.example.flowergrass.DataModel.Event;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class EventListAdapter extends ArrayAdapter<Event> {
@@ -40,9 +29,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
      * Holds variables in a View
      */
     private static class ViewHolder {
-        TextView name;
-        TextView date;
-        TextView details;
+        TextView title;
+        TextView dateCreated;
+        TextView content;
     }
 
 
@@ -58,12 +47,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         //get event information
         String id = getItem(position).getId();
         String author = getItem(position).getAuthor();
-        String title = getItem(position).getTitle();
-        String date = getItem(position).getDate();
-        String details = getItem(position).getContent();
-
-        //Create the Event object with the information
-        Event event = new Event(id,author,title,date,details);
+        String title = getItem(position).title;
+        Timestamp dateCreated = getItem(position).getDateCreated();
+        String content = getItem(position).getContent();
 
         //ViewHolder object
         ViewHolder holder;
@@ -72,18 +58,18 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
-            holder.name = convertView.findViewById(R.id.EventName);
-            holder.date = convertView.findViewById(R.id.EventDate);
-            holder.details = convertView.findViewById(R.id.EventDetails);
+            holder.title = convertView.findViewById(R.id.EventName);
+            holder.dateCreated = convertView.findViewById(R.id.EventDate);
+            holder.content = convertView.findViewById(R.id.EventDetails);
             convertView.setTag(holder);
         }
         else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(event.getTitle());
-        holder.date.setText(event.getDate());
-        holder.details.setText(event.getContent());
+        holder.title.setText(title);
+        holder.dateCreated.setText(dateCreated.toDate().toString());
+        holder.content.setText(content);
 
 
         return convertView;

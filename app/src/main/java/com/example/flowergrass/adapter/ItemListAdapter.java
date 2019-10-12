@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.data.Event;
+import com.example.flowergrass.DataModel.Event;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
 
@@ -45,12 +46,9 @@ public class ItemListAdapter extends ArrayAdapter<Event> {
         //get event information
         String id = getItem(position).getId();
         String author = getItem(position).getAuthor();
-        String title = getItem(position).getTitle();
-        String date = getItem(position).getDate();
-        String details = getItem(position).getContent();
-
-        //Create the Event object with the information
-        Event event = new Event(id,author,title,date,details);
+        String title = getItem(position).title;
+        Timestamp dateCreated = getItem(position).getDateCreated();
+        String content = getItem(position).getContent();
 
         //ViewHolder object
         ViewHolder holder;
@@ -68,9 +66,9 @@ public class ItemListAdapter extends ArrayAdapter<Event> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(event.getTitle());
-        holder.date.setText(event.getDate());
-        holder.details.setText(event.getContent());
+        holder.name.setText(title);
+        holder.date.setText(dateCreated.toDate().toString());
+        holder.details.setText(content);
 
 
         return convertView;

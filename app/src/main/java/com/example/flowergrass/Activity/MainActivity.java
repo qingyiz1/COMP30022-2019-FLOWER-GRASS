@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flowergrass.R;
-import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,13 +21,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
-    protected static final String TAG = "EmailPassword";
+    protected static final String TAG = "Login System";
 
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
-    public userModel newUser;
+    public UserModel newUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
 
         // Views
-
         mEmailField = findViewById(R.id.fieldEmail);
         mPasswordField = findViewById(R.id.fieldPassword);
         mStatusTextView=findViewById(R.id.mStatusTextView);
@@ -44,8 +43,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         // Buttons
         findViewById(R.id.LogInBtn).setOnClickListener(this);
         findViewById(R.id.SignUpBtn).setOnClickListener(this);
-        //findViewById(R.id.signOutButton).setOnClickListener(this);
-        //findViewById(R.id.verifyEmailButton).setOnClickListener(this);
         checkUserState();
 
     }
@@ -61,6 +58,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     // [END on_start_check_user]
 
 
+    /**
+     * move to homepage if user already logged in
+     */
     private void checkUserState(){
         if(mAuth.getCurrentUser() != null){
             Intent intent= new Intent(getApplicationContext(),Homepage.class);
@@ -70,6 +70,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    /**
+     * User sign in
+     * @param email
+     * @param password
+     */
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
@@ -112,10 +117,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         // [END sign_in_with_email]
     }
 
-    private void signOut() {
-        mAuth.signOut();
-        updateUI(null);
-    }
 
 //    private void sendEmailVerification() {
 //        // Disable button
@@ -201,12 +202,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         } else if (i == R.id.LogInBtn) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
         }
-
-//        } else if (i == R.id.signOutButton) {
-//            signOut();
-//        } else if (i == R.id.verifyEmailButton) {
-//            sendEmailVerification();
-//        }
     }
 
 

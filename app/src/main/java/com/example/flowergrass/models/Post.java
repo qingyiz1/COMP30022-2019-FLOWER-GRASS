@@ -18,7 +18,7 @@ public class Post {
     public String title;
     public String content;
     public String dateCreated;
-    public int thumbsUp = 0;
+    public int thumbsUp;
     public String imgSrc;
     public HashMap<String,Object> comments;
     FirebaseStorage storage = FirebaseStorage.getInstance();

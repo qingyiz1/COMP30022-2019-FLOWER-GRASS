@@ -19,9 +19,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.PostListAdapter;
-import com.example.flowergrass.data.Event;
-import com.example.flowergrass.data.Post;
-import com.example.flowergrass.models.userModel;
+import com.example.flowergrass.DataModel.Event;
+import com.example.flowergrass.DataModel.Post;
+import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
 import com.google.firebase.Timestamp;
@@ -44,7 +44,7 @@ public class SecondFragment extends Fragment {
     private Runnable animator;
     private static final long ANIM_DELAY = 10000;
 
-    userModel currentUser;
+    UserModel currentUser;
     public static final String ARG_ITEM_ID = "home_fragment";
 
     private static final long ANIM_VIEWPAGER_DELAY = 10000;
@@ -86,7 +86,7 @@ public class SecondFragment extends Fragment {
         //mViewPager = view.findViewById(R.id.view_pager);
         mItemListView = view.findViewById(R.id.ItemListView);
         getEventsData();
-        currentUser = new userModel();
+        currentUser = new UserModel();
         currentUser.getNickname();
         //mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         //mIndicator.setOnPageChangeListener(new HomeFragment.PageChangeListener());
@@ -176,7 +176,7 @@ public class SecondFragment extends Fragment {
                             if(doc.getString("imageUrl") != null){
                                 //posts.add(new Item(doc.getId(),doc.getString("title"),date.toDate().toString(),doc.getString("content"),doc.getString("imageUrl")));
                             }else{
-                                posts.add(new Event(doc.getId(),currentUser.nickName,doc.getString("title"),date.toDate().toString(),doc.getString("content")));
+                                posts.add(new Event(doc.getId(),currentUser.nickName,doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
                             }
 

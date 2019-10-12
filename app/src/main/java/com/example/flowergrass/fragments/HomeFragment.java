@@ -1,32 +1,19 @@
 package com.example.flowergrass.fragments;
 
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -34,7 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.EventListAdapter;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
-import com.example.flowergrass.data.Event;
+import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.utils.CirclePageIndicator;
 import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
@@ -220,7 +207,7 @@ public class HomeFragment extends Fragment {
                         for (QueryDocumentSnapshot doc : value) {
                             Timestamp date = (Timestamp)doc.getData().get("dateCreated");
 
-                            events.add(new Event(doc.getId(),doc.getString("author"),doc.getString("title"),date.toDate().toString(),doc.getString("details")));
+                            events.add(new Event(doc.getId(),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("details")));
 
                         }
                         mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,events));
