@@ -181,7 +181,7 @@ public class SecondFragment extends Fragment {
                             }
 
                         }
-                        mItemListView.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,posts));
+                        mItemListView.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.event_list_view,posts));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 

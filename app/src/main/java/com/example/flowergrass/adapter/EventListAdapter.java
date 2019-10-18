@@ -2,6 +2,7 @@ package com.example.flowergrass.adapter;
 
 import android.content.Context;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
      */
     private static class ViewHolder {
         TextView title;
+        TextView author;
         TextView dateCreated;
         TextView content;
     }
@@ -50,7 +52,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         String title = getItem(position).title;
         Timestamp dateCreated = getItem(position).getDateCreated();
         String content = getItem(position).getContent();
-
+        Log.d(TAG,content);
         //ViewHolder object
         ViewHolder holder;
 
@@ -59,6 +61,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
             holder.title = convertView.findViewById(R.id.EventName);
+            holder.author = convertView.findViewById(R.id.EventCreator);
             holder.dateCreated = convertView.findViewById(R.id.EventDate);
             holder.content = convertView.findViewById(R.id.EventDetails);
             convertView.setTag(holder);
@@ -68,6 +71,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         }
 
         holder.title.setText(title);
+        holder.author.setText(author);
         holder.dateCreated.setText(dateCreated.toDate().toString());
         holder.content.setText(content);
 
