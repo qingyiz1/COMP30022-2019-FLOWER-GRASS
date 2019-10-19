@@ -193,6 +193,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void getData(){
+        events.clear();
         db.collection("posts").whereEqualTo("category","Event")
                 .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
