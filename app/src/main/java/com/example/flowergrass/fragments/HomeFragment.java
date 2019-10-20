@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void getData(){
-        events.clear();
+
         db.collection("posts").whereEqualTo("category","Event")
                 .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -204,6 +204,7 @@ public class HomeFragment extends Fragment {
                             Log.w(TAG, "Listen failed.", e);
                             return;
                         }
+                        events.clear();
 
                         for (QueryDocumentSnapshot doc : value) {
                             Timestamp date = (Timestamp)doc.getData().get("dateCreated");

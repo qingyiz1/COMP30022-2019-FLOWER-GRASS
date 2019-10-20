@@ -18,7 +18,12 @@ import java.util.Map;
 
 public class AvatarActivity extends AppCompatActivity {
     GridView gridView;
-    int[] avatars = new int[]{R.drawable.avatar_boy,R.drawable.avatar_girl,R.drawable.avatar_girl2,R.drawable.avatar_girl2,R.drawable.avatar_girl3,R.drawable.avatar_girl4,R.drawable.avatar_man};
+    int[] avatars = new int[]{R.drawable.avatar_boy,R.drawable.avatar_girl,R.drawable.avatar_girl2,
+            R.drawable.avatar_girl3,R.drawable.avatar_girl4,R.drawable.avatar_man,
+            R.drawable.avatar_01,R.drawable.avatar_02,R.drawable.avatar_03,
+            R.drawable.avatar_04,R.drawable.avatar_05,R.drawable.avatar_06,
+            R.drawable.avatar_07,R.drawable.avatar_08,R.drawable.avatar_09,
+    };
     boolean isClicked = false;
 
 
