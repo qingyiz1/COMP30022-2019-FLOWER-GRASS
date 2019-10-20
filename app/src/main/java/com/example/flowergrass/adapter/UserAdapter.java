@@ -44,13 +44,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
         //get data
-        String userImage = userList.get(i).getImage();
+        int userImage = userList.get(i).avatarID;
         String userName = userList.get(i).nickName;
         final String userEmail = userList.get(i).email;
 
         //set data
         myHolder.mNameTv.setText(userName);
         myHolder.mEmailTv.setText(userEmail);
+        myHolder.mAvatarIv.setImageResource(userImage);
         try {
             Picasso.get().load(userImage)
                     .placeholder(R.drawable.avatar_boy)
