@@ -193,7 +193,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void getData(){
-        db.collection("events")
+        events.clear();
+        db.collection("posts").whereEqualTo("category","Event")
                 .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -207,10 +208,10 @@ public class HomeFragment extends Fragment {
                         for (QueryDocumentSnapshot doc : value) {
                             Timestamp date = (Timestamp)doc.getData().get("dateCreated");
 
-                            events.add(new Event(doc.getId(),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("details")));
+                            events.add(new Event(doc.getId(),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
                         }
-                        mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.adapter_view_layout,events));
+                        mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.event_list_view,events));
                         Log.d(TAG, "Current events in : " + events.toString());
                     }
 

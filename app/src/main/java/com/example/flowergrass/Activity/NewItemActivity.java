@@ -1,14 +1,17 @@
 package com.example.flowergrass.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.flowergrass.DataModel.Item;
+import com.example.flowergrass.DataModel.Post;
 import com.example.flowergrass.R;
-import com.example.flowergrass.models.Post;
 import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.utils.BaseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,8 +31,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -44,9 +49,8 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
     private static final String REQUIRED = "Required";
     private static final int PICK_IMAGE_REQUEST = 234;
 
-    private EditText mTitleField;
-    private EditText mBodyField;
-    private Post post;
+    private EditText mTitleField,mBodyField,mHashTag;
+    private Item item;
     private UserModel currentUser;
     private Button chooseBtn,uploadBtn,submitBtn;
     private ImageView uploadImg;
@@ -62,26 +66,35 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
 
         mTitleField = findViewById(R.id.fieldTitle);
         mBodyField = findViewById(R.id.fieldBody);
+        mHashTag = findViewById(R.id.fieldHashTag);
+        uploadImg = findViewById(R.id.uploadImg);
+
         chooseBtn = findViewById(R.id.chooseBtn);
         uploadBtn = findViewById(R.id.uploadBtn);
         submitBtn = findViewById(R.id.submitBtn);
-        uploadImg = findViewById(R.id.uploadImg);
+
         chooseBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
         submitBtn.setOnClickListener(this);
+
+
         currentUser = new UserModel();
         currentUser.getNickname();
 
     }
 
     private void submitPost(){
-        this.post = new Post(mAuth.getUid(),currentUser.nickName,mTitleField.getText().toString(),mBodyField.getText().toString());
-        db.collection("posts").document(mTitleField.getText().toString())
-                .set(post.toMap())
+
+        this.item = new Item(mAuth.getUid(),currentUser.nickName,mTitleField.getText().toString(),mHashTag.getText().toString(),Timestamp.now(),
+                mBodyField.getText().toString());
+        String imageUrl = item.getImageUrl();
+        db.collection("posts").document(item.getId())
+                .set(item.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
+                        uploadImg();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -98,7 +111,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference uploadRef = mStorageImagesRef.child("test.jpg");
+            StorageReference uploadRef = mStorageImagesRef.child(mAuth.getUid()).child(item.getId());
             uploadTask = uploadRef.putFile(filePath);
 
             // Register observers to listen for when the download is done or if it fails
@@ -113,7 +126,24 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(),"upload successful",Toast.LENGTH_LONG).show();
+
+                    new AlertDialog.Builder(NewItemActivity.this)
+                            .setTitle("Success!")
+                            .setMessage("Successfully posted new item!")
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Direct to Homepage
+                                    finish();
+                                }
+                            })
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            //.setNegativeButton(android.R.string.no, null)
+                            .setIcon(R.drawable.ic_create_success)
+                            .show();
+
+
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -181,9 +211,6 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
         if(view == chooseBtn){
             // open file chooser
             chooseFile();
-        }else if(view == uploadBtn){
-            //upload file to firebase storage
-            uploadImg();
         }else if(view == submitBtn){
             submitPost();
         }
