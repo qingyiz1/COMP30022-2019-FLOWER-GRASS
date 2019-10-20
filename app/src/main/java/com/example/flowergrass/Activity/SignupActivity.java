@@ -36,7 +36,6 @@ public class SignupActivity extends MainActivity {
     private EditText mEmailField,mPasswordField,mNickName;
     private EditText fieldBirthday,fieldBirthMonth,fieldBirthYear;
     private UserModel newUser;
-    private List<String> birthday = new ArrayList<>();
     private String userUID;
     protected static final String TAG = "SignUpActivity";
     private int currentImgId;
@@ -64,9 +63,8 @@ public class SignupActivity extends MainActivity {
 
 
     public void updateDatabase(String filePath){
-        birthday.add(fieldBirthMonth.getText().toString());
-        birthday.add(fieldBirthday.getText().toString());
-        birthday.add(fieldBirthYear.getText().toString());
+        String birthday = fieldBirthday.getText().toString()+"/"+fieldBirthMonth.getText().toString()+"/"+fieldBirthYear.getText().toString();
+
         this.newUser = new UserModel(currentImgId,birthday,mEmailField.getText().toString(),mNickName.getText().toString(), Timestamp.now());
 
 

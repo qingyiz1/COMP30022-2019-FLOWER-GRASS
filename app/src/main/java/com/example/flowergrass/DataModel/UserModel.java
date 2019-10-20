@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class UserModel extends BaseActivity {
 
-    public List<String> birthday;
+    public String birthday;
     public String email;
     public String nickName;
     protected static final String TAG = "UserModel";
@@ -33,7 +33,7 @@ public class UserModel extends BaseActivity {
         // Default constructor required for calls to DataSnapshot.getValue(UserModel.class)
     }
 
-    public UserModel(int avatarID,List<String> birthday, String email, String nickName, Timestamp dateCreated) {
+    public UserModel(int avatarID,String birthday, String email, String nickName, Timestamp dateCreated) {
         this.avatarID = avatarID;
         this.birthday = birthday;
         this.email = email;
@@ -71,7 +71,7 @@ public class UserModel extends BaseActivity {
     public Map<String, Object> toMap() {
         // Create a new user with a first and last name
         Map<String, Object> newUser = new HashMap<>();
-        newUser.put("Birthday", this.birthday.get(0)+"/"+ this.birthday.get(1)+"/"+ this.birthday.get(2));
+        newUser.put("Birthday", this.birthday);
         newUser.put("avatarID",this.avatarID);
         newUser.put("Email", this.email);
         newUser.put("Nickname", this.nickName);
