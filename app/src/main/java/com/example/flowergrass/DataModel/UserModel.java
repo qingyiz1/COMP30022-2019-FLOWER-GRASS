@@ -14,12 +14,13 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserModel extends BaseActivity {
+public class UserModel {
 
     public String birthday;
     public String email;
@@ -28,6 +29,11 @@ public class UserModel extends BaseActivity {
     public Timestamp dateCreated;
     private int avatarID;
 
+    protected FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    String uid;
+
+    String image;
 
     public UserModel() {
         // Default constructor required for calls to DataSnapshot.getValue(UserModel.class)
@@ -71,10 +77,10 @@ public class UserModel extends BaseActivity {
     public Map<String, Object> toMap() {
         // Create a new user with a first and last name
         Map<String, Object> newUser = new HashMap<>();
-        newUser.put("Birthday", this.birthday);
+        newUser.put("birthday", this.birthday);
         newUser.put("avatarID",this.avatarID);
-        newUser.put("Email", this.email);
-        newUser.put("Nickname", this.nickName);
+        newUser.put("email", this.email);
+        newUser.put("nickName", this.nickName);
         newUser.put("dateCreated",this.dateCreated);
         return newUser;
     }
@@ -87,5 +93,20 @@ public class UserModel extends BaseActivity {
         //Log.d(TAG,nickName);
     }
 
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
 // [END blog_user_class]
