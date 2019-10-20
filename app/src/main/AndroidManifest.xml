@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Activity.NewEventActivity"></activity>
+        <activity android:name=".Activity.ChatActivity"
+            android:theme="@style/AppThemeNo"/>
+        <activity android:name=".Activity.NewEventActivity" />
         <activity android:name=".Activity.AvatarActivity" />
         <activity android:name=".fragments.EventDetailFragment" />
         <activity android:name=".Activity.Homepage" />
