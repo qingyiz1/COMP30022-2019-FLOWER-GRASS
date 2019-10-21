@@ -2,6 +2,8 @@ package com.example.flowergrass.adapter;
 
 import android.content.Context;
 
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.R;
 import com.example.flowergrass.DataModel.Event;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,13 +30,18 @@ import java.util.ArrayList;
 public class EventListAdapter extends ArrayAdapter<Event> {
 
     private static final String TAG = "EventListAdapter";
-
     private Context mContext;
     private int mResource;
+    private Handler handler;
     private int lastPosition = -1;
     protected FirebaseFirestore db = FirebaseFirestore.getInstance();
     //ViewHolder object
     ViewHolder holder;
+    String authorUid, author,title,content;
+    Timestamp dateCreated;
+    int avatarId;
+
+
 
     /**
      * Holds variables in a View
@@ -54,14 +63,18 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         //get event information
-        String authorUid = getItem(position).getAuthorUid();
-        String author = getItem(position).getAuthor();
-        String title = getItem(position).title;
-        Timestamp dateCreated = getItem(position).getDateCreated();
-        String content = getItem(position).getContent();
-        Log.d(TAG,content);
+        authorUid = getItem(position).getAuthorUid();
+         author = getItem(position).getAuthor();
+         title = getItem(position).title;
+         dateCreated = getItem(position).getDateCreated();
+         content = getItem(position).getContent();
+        //int avatarId = getItem(position).getAuthorAvatarId();
+        //Log.d(TAG,""+avatarId);
+        //int avatarId = 2131230816;
+
+
 
 
         if(convertView == null){
@@ -79,22 +92,35 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
+        if(getItem(position).getAuthorAvatarId() ==0){
+            DocumentReference docRef = db.collection("users").document(getItem(position).getAuthorUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    avatarId = Integer.parseInt(documentSnapshot.get("avatarID").toString());
+                    Log.d(TAG,getItem(position).getAuthor()+""+avatarId);
+                    getItem(position).setAuthorAvatarId(avatarId);
+                    holder.avatar.setImageResource(getItem(position).getAuthorAvatarId());
+                }
+            });
+        }
+
+
+
         holder.title.setText(title);
         holder.author.setText(author);
         holder.dateCreated.setText(dateCreated.toDate().toString());
         holder.content.setText(content);
-
-        DocumentReference docRef = db.collection("users").document(authorUid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                holder.avatar.setImageResource(Integer.parseInt(documentSnapshot.get("avatarID").toString()));
-            }
-        });
-
+        if(getItem(position).getAuthorAvatarId() ==0){
+            holder.avatar.setImageResource(R.drawable.avatar_default);
+        }else{
+            holder.avatar.setImageResource(getItem(position).getAuthorAvatarId());
+        }
 
         return convertView;
     }
+
 
 
 

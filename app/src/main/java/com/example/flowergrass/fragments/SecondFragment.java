@@ -44,7 +44,7 @@ public class SecondFragment extends Fragment {
     private static final long ANIM_DELAY = 10000;
 
     UserModel currentUser;
-    public static final String ARG_ITEM_ID = "home_fragment";
+    public static final String ARG_ITEM_ID = "Second_fragment";
 
     private static final long ANIM_VIEWPAGER_DELAY = 10000;
     private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
@@ -117,7 +117,7 @@ public class SecondFragment extends Fragment {
                             }
 
                         }
-                        TimelineRight.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.timeline_right,posts));
+                        TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,posts));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 

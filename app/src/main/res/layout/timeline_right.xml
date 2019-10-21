@@ -2,27 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    >
 
 
     <TextView
         android:id="@+id/EventName"
-
         android:layout_width="217dp"
         android:layout_height="106dp"
         android:layout_weight="1"
         android:text="EventName"
-        android:textSize="15dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="15dp" />
 
 
     <ImageView
         android:id="@+id/EventAvatar"
         android:layout_width="214dp"
         android:layout_height="191dp"
-        android:layout_marginTop="-60dp"
         android:layout_marginLeft="-30dp"
+        android:layout_marginTop="-30dp"
         android:src="@drawable/timeline_small_line" />
 
     <TextView
@@ -37,8 +37,9 @@
 
     <TextView
         android:id="@+id/EventDetails"
+        android:padding="5dp"
         android:layout_width="111dp"
-        android:layout_height="78dp"
+        android:layout_height="88dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1100dp"

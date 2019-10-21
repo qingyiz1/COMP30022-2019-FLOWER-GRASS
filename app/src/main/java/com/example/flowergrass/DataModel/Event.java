@@ -10,6 +10,16 @@ public class Event extends Post{
     private List<String> comments;
     private String category = "Event";
 
+    public int getAuthorAvatarId() {
+        return authorAvatarId;
+    }
+
+    public void setAuthorAvatarId(int authorAvatarId) {
+        this.authorAvatarId = authorAvatarId;
+    }
+
+    private int authorAvatarId;
+
     public Event(String authorUid, String author, String title,String hashTag,Timestamp date, String content) {
         super(authorUid,author,title,hashTag,date,content);
     }

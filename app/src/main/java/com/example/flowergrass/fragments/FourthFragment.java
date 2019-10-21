@@ -2,12 +2,14 @@ package com.example.flowergrass.fragments;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.flowergrass.Activity.MainActivity;
 import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.EventListAdapter;
@@ -38,7 +41,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FourthFragment extends Fragment {
+public class FourthFragment extends Fragment implements View.OnClickListener {
     public static final String ARG_ITEM_ID = "fourth_fragment";
 
     private static final long ANIM_VIEWPAGER_DELAY = 10000;
@@ -46,17 +49,12 @@ public class FourthFragment extends Fragment {
     private static final String TAG = "FOURTH_FRAGMENT";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     TextView mEmail,mNickname,mBirthday;
     ImageView mAvatar;
 
-
-    AlertDialog alertDialog;
-
-
-
-
+    Button editBtn,logoutBtn;
     FragmentActivity activity;
 
 
@@ -75,7 +73,11 @@ public class FourthFragment extends Fragment {
         mNickname = view.findViewById(R.id.me_nickname);
         mBirthday = view.findViewById(R.id.me_birthday);
         mAvatar = view.findViewById(R.id.me_avatar);
-
+        //editBtn = view.findViewById(R.id.me_edit_btn);
+        logoutBtn = view.findViewById(R.id.me_logout_btn);
+        activity = getActivity();
+        //editBtn.setOnClickListener(this);
+        logoutBtn.setOnClickListener(this);
         getData();
     }
 
@@ -96,5 +98,17 @@ public class FourthFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == editBtn ){
+
+        }else if(view == logoutBtn){
+            mAuth.signOut();
+            Intent intent = new Intent(activity, MainActivity.class);
+            startActivity(intent);
+            activity.finish();
+        }
     }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,12 +16,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.flowergrass.Activity.Homepage;
+import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.ClickableViewPager;
 import com.example.flowergrass.adapter.EventListAdapter;
@@ -29,7 +32,12 @@ import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.utils.CirclePageIndicator;
 import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -61,7 +69,7 @@ public class HomeFragment extends Fragment {
     //Data - Temporary
     int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
     ArrayList<Event> events = new ArrayList<>();
-
+    Event newEvent;
 
     //Sliding Animation
     boolean stopSliding = false;
@@ -92,13 +100,11 @@ public class HomeFragment extends Fragment {
     private void Init(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
         mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
-
-
-
         mEventListView = view.findViewById(R.id.EventListView);
         getData();
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         mIndicator.setOnPageChangeListener(new PageChangeListener());
+        mIndicator.setViewPager(mViewPager);
     }
 
     public void runnable(final int size) {
@@ -124,10 +130,10 @@ public class HomeFragment extends Fragment {
     public void onResume() {
 
 
-        mIndicator.setViewPager(mViewPager);
-        runnable(products.length);
+
+        //runnable(products.length);
         //Re-run callback
-        handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+        //handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
 
         super.onResume();
     }
@@ -203,30 +209,34 @@ public class HomeFragment extends Fragment {
     }
 
     public void getData(){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.collection("posts").whereEqualTo("category","Event")
+                        .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value,
+                                                @Nullable FirebaseFirestoreException e) {
+                                if (e != null) {
+                                    Log.w(TAG, "Listen failed.", e);
+                                    return;
+                                }
+                                events.clear();
 
-        db.collection("posts").whereEqualTo("category","Event")
-                .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
-                        events.clear();
+                                for (QueryDocumentSnapshot doc : value) {
+                                    Timestamp date = (Timestamp)doc.getData().get("dateCreated");
+                                    newEvent = new Event(doc.getString("authorUid"),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content"));
+                                    events.add(newEvent);
+                                    mEventListView.setAdapter(new EventListAdapter(activity, R.layout.event_list_view, events));
+                                }
+                            }
+                        });
+            }
+        });
 
-                        for (QueryDocumentSnapshot doc : value) {
-                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
 
-                            events.add(new Event(doc.getString("authorUid"),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
-                        }
-                        mEventListView.setAdapter(new EventListAdapter(activity,R.layout.event_list_view,events));
-                        Log.d(TAG, "Current events in : " + events.toString());
-                    }
-
-                });
     }
 
 }

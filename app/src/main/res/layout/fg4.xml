@@ -152,16 +152,61 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/SignUpBtn2"
-                android:layout_width="171dp"
-                android:layout_height="132dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/save_button"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="105dp" />
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                >
 
+<!--                <LinearLayout-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    >-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/me_edit_btn"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@drawable/edit_btn"-->
+<!--                        tools:layout_editor_absoluteX="8dp"-->
+<!--                        tools:layout_editor_absoluteY="105dp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Edit"-->
+<!--                        android:textColor="@color/black"/>-->
+<!--                </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <Button
+                        android:id="@+id/me_logout_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:background="@drawable/logout_btn"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="105dp" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Log Out"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
 
 
