@@ -7,13 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.flowergrass.R;
 import com.example.flowergrass.DataModel.Event;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    protected FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //ViewHolder object
+    ViewHolder holder;
 
     /**
      * Holds variables in a View
@@ -34,6 +42,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView author;
         TextView dateCreated;
         TextView content;
+        ImageView avatar;
     }
 
 
@@ -47,14 +56,13 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get event information
-        String id = getItem(position).getId();
+        String authorUid = getItem(position).getAuthorUid();
         String author = getItem(position).getAuthor();
         String title = getItem(position).title;
         Timestamp dateCreated = getItem(position).getDateCreated();
         String content = getItem(position).getContent();
         Log.d(TAG,content);
-        //ViewHolder object
-        ViewHolder holder;
+
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -64,6 +72,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             holder.author = convertView.findViewById(R.id.EventCreator);
             holder.dateCreated = convertView.findViewById(R.id.EventDate);
             holder.content = convertView.findViewById(R.id.EventDetails);
+            holder.avatar = convertView.findViewById(R.id.EventAvatar);
             convertView.setTag(holder);
         }
         else {
@@ -74,6 +83,15 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         holder.author.setText(author);
         holder.dateCreated.setText(dateCreated.toDate().toString());
         holder.content.setText(content);
+
+        DocumentReference docRef = db.collection("users").document(authorUid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d(TAG,documentSnapshot.get("avatarID").toString());
+                //holder.avatar.setImageResource();
+            }
+        });
 
 
         return convertView;

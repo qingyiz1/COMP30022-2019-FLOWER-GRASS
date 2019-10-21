@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment {
                         for (QueryDocumentSnapshot doc : value) {
                             Timestamp date = (Timestamp)doc.getData().get("dateCreated");
 
-                            events.add(new Event(doc.getId(),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
+                            events.add(new Event(doc.getString("authorUid"),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
                         }
                         mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.event_list_view,events));

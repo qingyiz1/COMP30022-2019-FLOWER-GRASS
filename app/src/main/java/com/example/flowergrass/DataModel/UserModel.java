@@ -58,7 +58,7 @@ public class UserModel {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        nickName =document.getString("Nickname");
+                        nickName =document.getString("nickName");
                         setNickName(nickName);
                     } else {
                         Log.d(TAG, "No such document");
