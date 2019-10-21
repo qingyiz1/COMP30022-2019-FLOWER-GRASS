@@ -22,9 +22,9 @@
             android:orientation="horizontal">
 
             <ListView
+                android:id="@+id/TIMELINELEFT"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></ListView>
+                android:layout_height="wrap_content"></ListView>
         </LinearLayout>
 
         <ImageView
@@ -39,9 +39,9 @@
             android:orientation="horizontal">
 
             <ListView
+                android:id="@+id/TIMELINERIGHT"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></ListView>
+                android:layout_height="wrap_content"></ListView>
         </LinearLayout>
 
 
