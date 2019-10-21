@@ -36,6 +36,7 @@
             android:layout_gravity="center">
 
             <ImageView
+                android:id="@+id/me_avatar"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:layout_gravity="center"
@@ -81,7 +82,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/fieldEmail2"
+                    android:id="@+id/me_email"
                     android:layout_width="162dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -114,7 +115,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/fieldNickname2"
+                    android:id="@+id/me_nickname"
                     android:layout_width="162dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -140,74 +141,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Birthday"
+                    android:text="Birthday:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
+
                 <TextView
-                    android:id="@+id/fieldBirthMonth"
+                    android:id="@+id/me_birthday"
                     android:layout_width="162dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Month"
 
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-
-                <TextView
-                    android:id="@+id/fieldBirthDay"
-                    android:layout_width="162dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Day"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"/>
 
 
-                <TextView
-                    android:id="@+id/fieldBirthYear"
-                    android:layout_width="162dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Year"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
 
 
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/EditButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/SignUpBtn2"
+                android:layout_width="171dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Edit"
-                android:textSize="25sp"
+                android:background="@drawable/save_button"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="105dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="what test"></TextView>
 
 
+
+
+
+
+
+
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
