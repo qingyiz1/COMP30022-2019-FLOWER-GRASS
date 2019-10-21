@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Post extends BaseActivity {
+
+
     private String authorUid;
     private String id;
     private String author;
@@ -40,6 +42,10 @@ public class Post extends BaseActivity {
         result.put("content", content);
         result.put("dateCreated",dateCreated);
         return result;
+    }
+
+    public String getAuthorUid() {
+        return authorUid;
     }
 
     public Timestamp getDateCreated() {return dateCreated;}
