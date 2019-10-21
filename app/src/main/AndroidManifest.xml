@@ -13,7 +13,7 @@
             android:theme="@style/AppThemeNo"/>
         <activity android:name=".Activity.NewEventActivity" />
         <activity android:name=".Activity.AvatarActivity" />
-        <activity android:name=".fragments.EventDetailFragment" />
+        <activity android:name=".fragments.ItemDetailFragment" />
         <activity android:name=".Activity.Homepage" />
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.ProfileActivity" />

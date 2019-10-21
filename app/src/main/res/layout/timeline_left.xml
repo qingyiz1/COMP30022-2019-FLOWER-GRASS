@@ -9,7 +9,7 @@
         android:layout_width="186dp"
         android:layout_height="240dp"
         android:layout_weight="1"
-        app:srcCompat="@drawable/Rectangle" />
+        app:srcCompat="@drawable/rectangle" />
 
     <ImageView
         android:id="@+id/imageView2"
