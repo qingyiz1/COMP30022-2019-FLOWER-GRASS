@@ -117,7 +117,7 @@ public class SecondFragment extends Fragment {
                             }
 
                         }
-                        TimelineRight.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.timeline_right,posts));
+                        //TimelineRight.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.timeline_right,posts));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 

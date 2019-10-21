@@ -92,9 +92,9 @@ public class FourthFragment extends Fragment {
                             mEmail.setText(doc.getString("email"));
                             mNickname.setText(doc.getString("nickName"));
                             mBirthday.setText(doc.getString("birthday"));
-                            mAvatar.setImageResource(Integer.parseInt(doc.getString("avatarID")));
+                            mAvatar.setImageResource(Integer.parseInt(doc.get("avatarID").toString()));
                         }
                     }
-                }
+                });
     }
 }
