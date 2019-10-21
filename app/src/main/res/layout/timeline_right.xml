@@ -13,21 +13,23 @@
         android:layout_weight="1"
         android:paddingTop="10dp"
         android:scaleY="2"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/timeline_small_line" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="208dp"
         android:layout_height="257dp"
+        android:layout_marginStart="200dp"
         android:layout_weight="1"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/rectangle" />
+        app:srcCompat="@drawable/rectangle"
+        tools:layout_editor_absoluteY="1dp" />
 
     <TextView
         android:id="@+id/EventName"
@@ -66,13 +68,11 @@
 
     <TextView
         android:id="@+id/EventDetails"
-        android:layout_width="181dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="214dp"
-        android:layout_marginTop="13dp"
+        android:layout_width="185dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="16dp"
 
-        android:layout_marginBottom="376dp"
+        android:layout_marginBottom="1100dp"
         android:text="EventDetails"
         android:textColor="@color/whitesmoke"
         android:textSize="5dp"
@@ -81,7 +81,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

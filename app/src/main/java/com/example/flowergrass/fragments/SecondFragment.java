@@ -22,7 +22,6 @@ import com.example.flowergrass.adapter.PostListAdapter;
 import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.DataModel.Post;
 import com.example.flowergrass.DataModel.UserModel;
-import com.example.flowergrass.utils.GlideApp;
 import com.example.flowergrass.utils.PageIndicator;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.EventListener;
@@ -55,13 +54,9 @@ public class SecondFragment extends Fragment {
 
     // UI References
     private ListView TimelineRight;
-    //TextView imgNameTxt;
-    PageIndicator mIndicator;
 
-    AlertDialog alertDialog;
 
     //Data - Temporary
-    int[] products ={R.drawable.data1,R.drawable.data2,R.drawable.data3};
     ArrayList<Post> posts = new ArrayList<>();
 
 
@@ -92,69 +87,10 @@ public class SecondFragment extends Fragment {
         //mIndicator.setOnPageChangeListener(new HomeFragment.PageChangeListener());
     }
 
-    public void runnable() {
-        handler = new Handler();
-        animator = new Runnable() {
-            public void run() {
-                //animate(demoImage, imagesToShow, 0, false);
-                handler.postDelayed(animator, ANIM_DELAY);
-            }
-        };
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        runnable();
-        handler.postDelayed(animator, ANIM_DELAY);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (handler != null) {
-            //Remove callback
-            handler.removeCallbacks(animator);
-        }
-    }
 
 
-    public void showAlertDialog(String message, final boolean finish) {
-        alertDialog = new AlertDialog.Builder(activity).create();
-        alertDialog.setMessage(message);
-        alertDialog.setCancelable(false);
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        if (finish)
-                            activity.finish();
-                    }
-                });
-        alertDialog.show();
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    public void loadWithGlide(View container, int ID) {
-        // [START storage_load_with_glide]
-        // Reference to an image file in Cloud Storage
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/test.jpg");
-
-        // ImageView in your Activity
-        ImageView imageView = container.findViewById(ID);
-
-        // Download directly from StorageReference using Glide
-        // (See MyAppGlideModule for Loader registration)
-        GlideApp.with(this /* context */)
-                .load(storageReference)
-                .into(imageView);
-        // [END storage_load_with_glide]
-    }
 
 
     public void getEventsData(){
