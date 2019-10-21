@@ -8,19 +8,19 @@
 
     <ImageView
         android:layout_gravity="center"
-        android:id="@+id/item_details_eventAvatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/item_details_image"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:src="@drawable/avatar_boy"
         />
 
     <TextView
         android:gravity="center"
         android:textAlignment="center"
-        android:text="EventName"
+        android:text="ItemName"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/item_details_eventName"
+        android:layout_height="50dp"
+        android:id="@+id/item_details_title"
         android:textSize="20dp"
         android:textColor="@color/whitesmoke"
         android:layout_weight="66.6"/>
@@ -42,7 +42,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:textColor="@color/whitesmoke"
-                android:id="@+id/item_details_eventCreator"/>
+                android:id="@+id/item_details_author"/>
 
             <TextView
                 android:gravity="center"
@@ -51,7 +51,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:textColor="@color/whitesmoke"
-                android:id="@+id/item_details_eventDate"
+                android:id="@+id/item_details_date"
                 />
 
         </LinearLayout>
@@ -60,9 +60,9 @@
             android:gravity="center"
             android:text="EventDetails"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="250dp"
                 android:textColor="@color/whitesmoke"
-            android:id="@+id/item_details_eventDetails"/>
+            android:id="@+id/item_details_content"/>
     </LinearLayout>
 
 </LinearLayout>

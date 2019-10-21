@@ -16,7 +16,7 @@
         <activity android:name=".fragments.ItemDetailFragment" />
         <activity android:name=".Activity.Homepage" />
         <activity android:name=".Activity.SignupActivity" />
-        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.ItemDetailsActivity" />
         <activity android:name=".Activity.NewItemActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>

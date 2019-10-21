@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.flowergrass.DataModel.Item;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.SpinnerAdapter;
 import com.example.flowergrass.fragments.FourthFragment;
@@ -148,6 +149,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                 setChioceItem(3);
                 break;
             default:
+                setChioceItem(4);
                 break;
         }
     }
@@ -157,7 +159,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
      *
      * @param index Fragment：0, 1, 2, 3
      */
-    private void setChioceItem(int index) {
+    public void setChioceItem(int index) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         clearChioce(); // Hide all Fragments
         hideFragments(fragmentTransaction);
@@ -218,6 +220,7 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
                     fragmentTransaction.show(fg4);
                 }
                 break;
+
         }
         fragmentTransaction.commit();
     }
@@ -261,6 +264,13 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         if (fg4 != null) {
             fragmentTransaction.hide(fg4);
         }
+    }
+
+    public void ShowItemDetail(int position) {
+        Intent intent = new Intent(Homepage.this,ItemDetailsActivity.class);
+        intent.putExtra("id",position);
+        startActivity(intent);
+        finish();
     }
 }
 

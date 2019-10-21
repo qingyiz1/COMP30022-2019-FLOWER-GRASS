@@ -111,7 +111,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference uploadRef = mStorageImagesRef.child(mAuth.getUid()).child(item.getId());
+            StorageReference uploadRef = mStorageImagesRef.child(item.getId());
             uploadTask = uploadRef.putFile(filePath);
 
             // Register observers to listen for when the download is done or if it fails

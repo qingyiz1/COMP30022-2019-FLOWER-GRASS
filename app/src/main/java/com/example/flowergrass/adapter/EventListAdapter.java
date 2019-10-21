@@ -88,8 +88,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d(TAG,documentSnapshot.get("avatarID").toString());
-                //holder.avatar.setImageResource();
+                holder.avatar.setImageResource(Integer.parseInt(documentSnapshot.get("avatarID").toString()));
             }
         });
 

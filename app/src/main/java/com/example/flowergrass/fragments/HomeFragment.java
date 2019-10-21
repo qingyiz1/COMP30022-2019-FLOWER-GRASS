@@ -13,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.example.flowergrass.Activity.Homepage;
 import com.example.flowergrass.R;
+import com.example.flowergrass.adapter.ClickableViewPager;
 import com.example.flowergrass.adapter.EventListAdapter;
 import com.example.flowergrass.adapter.ImageSlideAdapter;
 import com.example.flowergrass.DataModel.Event;
@@ -64,14 +68,14 @@ public class HomeFragment extends Fragment {
     private Runnable animateViewPager;
     private Handler handler;
 
-    FragmentActivity activity;
+    Homepage activity;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity = (Homepage)getActivity();
     }
 
     @Override
@@ -87,6 +91,10 @@ public class HomeFragment extends Fragment {
     //Initialise Image slider and EventListView
     private void Init(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
+        mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
+
+
+
         mEventListView = view.findViewById(R.id.EventListView);
         getData();
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
@@ -95,7 +103,7 @@ public class HomeFragment extends Fragment {
 
     public void runnable(final int size) {
         handler = new Handler();
-        new Thread(animateViewPager = new Runnable() {
+        animateViewPager = new Runnable() {
             public void run() {
                 if (!stopSliding) {
                     if (mViewPager.getCurrentItem() == size - 1) {
@@ -108,13 +116,13 @@ public class HomeFragment extends Fragment {
                     handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
                 }
             }
-        }).start();
+        };
     }
 
 
     @Override
     public void onResume() {
-        mViewPager.setAdapter(new ImageSlideAdapter(activity, products,HomeFragment.this));
+
 
         mIndicator.setViewPager(mViewPager);
         runnable(products.length);
@@ -150,6 +158,8 @@ public class HomeFragment extends Fragment {
                 });
         alertDialog.show();
     }
+
+
 
     private class PageChangeListener implements ViewPager.OnPageChangeListener {
 
@@ -212,7 +222,7 @@ public class HomeFragment extends Fragment {
                             events.add(new Event(doc.getString("authorUid"),doc.getString("author"),doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
                         }
-                        mEventListView.setAdapter(new EventListAdapter(getActivity().getApplicationContext(),R.layout.event_list_view,events));
+                        mEventListView.setAdapter(new EventListAdapter(activity,R.layout.event_list_view,events));
                         Log.d(TAG, "Current events in : " + events.toString());
                     }
 
