@@ -1,35 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
+
         android:id="@+id/imageView"
-        android:layout_width="186dp"
-        android:layout_height="240dp"
+        android:layout_width="215dp"
+        android:layout_height="302dp"
         android:layout_weight="1"
-        app:srcCompat="@drawable/Rectangle" />
+        app:srcCompat="@drawable/rectangle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-33dp" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="222dp"
         android:layout_height="241dp"
-        android:layout_marginLeft="-12dp"
-        android:layout_marginRight="-20dp"
         android:layout_weight="1"
         android:paddingTop="10dp"
         android:scaleY="2"
-        app:srcCompat="@drawable/timeline_small_line" />
+        app:srcCompat="@drawable/timeline_small_line"
+        tools:layout_editor_absoluteX="204dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/EventName"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-190dp"
-        android:layout_marginTop="80dp"
         android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="30dp" />
-</LinearLayout>
+        android:text="EventName"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/EventDate"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="EventDate"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+
+    <TextView
+        android:id="@+id/EventDetails"
+        android:layout_width="181dp"
+        android:layout_height="93dp"
+        android:text="EventDetails"
+        android:textColor="@color/whitesmoke"
+        android:textSize="24dp"
+
+        android:translationZ="30dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,7 +54,7 @@ public class SecondFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // UI References
-    private ListView mItemListView;
+    private ListView TimelineRight;
     //TextView imgNameTxt;
     PageIndicator mIndicator;
 
@@ -84,7 +84,7 @@ public class SecondFragment extends Fragment {
     //Initialise Image slider and EventListView
     private void Init(View view) {
         //mViewPager = view.findViewById(R.id.view_pager);
-        //mItemListView = view.findViewById(R.id.EventListView);
+        TimelineRight = view.findViewById(R.id.TIMELINERIGHT);
         getEventsData();
         currentUser = new UserModel();
         currentUser.getNickname();
@@ -158,7 +158,7 @@ public class SecondFragment extends Fragment {
 
 
     public void getEventsData(){
-        db.collection("events")
+        db.collection("posts")
                 .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -181,7 +181,7 @@ public class SecondFragment extends Fragment {
                             }
 
                         }
-                        mItemListView.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.event_list_view,posts));
+                        TimelineRight.setAdapter(new PostListAdapter(getActivity().getApplicationContext(),R.layout.timeline_right,posts));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 
