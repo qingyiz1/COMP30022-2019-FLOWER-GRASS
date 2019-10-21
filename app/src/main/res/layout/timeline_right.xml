@@ -12,11 +12,18 @@
         android:layout_width="217dp"
         android:layout_height="106dp"
         android:layout_weight="1"
-
-        android:background="@drawable/timeline_small_line"
         android:text="EventName"
         android:textSize="15dp"
         android:textColor="@color/white"/>
+
+
+    <ImageView
+        android:id="@+id/EventAvatar"
+        android:layout_width="214dp"
+        android:layout_height="191dp"
+        android:layout_marginTop="-60dp"
+        android:layout_marginLeft="-30dp"
+        android:src="@drawable/timeline_small_line" />
 
     <TextView
         android:id="@+id/EventDate"
@@ -25,8 +32,8 @@
         android:layout_marginTop="40dp"
         android:layout_weight="1"
         android:text="EventDate"
-        android:textSize="8dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="8dp" />
 
     <TextView
         android:id="@+id/EventDetails"
