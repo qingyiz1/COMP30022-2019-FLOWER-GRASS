@@ -157,19 +157,7 @@
                 android:textColor="@color/sign_up_text"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/fieldBirthMonth"
-                android:layout_width="162dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Month"
 
-                android:inputType="text"
-                android:textAlignment="center"
-                android:textColor="@color/sign_up_text"
-                android:textColorHint="@color/sign_up_text_hint" />
 
             <EditText
                 android:id="@+id/fieldBirthDay"
@@ -184,6 +172,19 @@
                 android:textColor="@color/sign_up_text"
                 android:textColorHint="@color/sign_up_text_hint" />
 
+            <EditText
+                android:id="@+id/fieldBirthMonth"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Month"
+
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="@color/sign_up_text"
+                android:textColorHint="@color/sign_up_text_hint" />
 
             <EditText
                 android:id="@+id/fieldBirthYear"

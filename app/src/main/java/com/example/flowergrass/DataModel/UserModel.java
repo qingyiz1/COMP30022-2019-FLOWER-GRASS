@@ -27,7 +27,7 @@ public class UserModel {
     public String nickName;
     protected static final String TAG = "UserModel";
     public Timestamp dateCreated;
-    private int avatarID;
+    public int avatarID;
 
     protected FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -58,7 +58,7 @@ public class UserModel {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        nickName =document.getString("Nickname");
+                        nickName =document.getString("nickName");
                         setNickName(nickName);
                     } else {
                         Log.d(TAG, "No such document");
@@ -101,12 +101,6 @@ public class UserModel {
     public void setUid(String uid) {
         this.uid = uid;
     }
-    public String getImage() {
-        return image;
-    }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 }
 // [END blog_user_class]

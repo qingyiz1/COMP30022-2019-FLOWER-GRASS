@@ -1,6 +1,7 @@
 package com.example.flowergrass.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flowergrass.Activity.ChatActivity;
 import com.example.flowergrass.DataModel.UserModel;
 import com.example.flowergrass.R;
 import com.squareup.picasso.Picasso;
@@ -44,13 +46,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
         //get data
-        String userImage = userList.get(i).getImage();
+        final String hisUID = userList.get(i).getUid();
+        int userImage = userList.get(i).avatarID;
         String userName = userList.get(i).nickName;
         final String userEmail = userList.get(i).email;
 
         //set data
         myHolder.mNameTv.setText(userName);
         myHolder.mEmailTv.setText(userEmail);
+        myHolder.mAvatarIv.setImageResource(userImage);
         try {
             Picasso.get().load(userImage)
                     .placeholder(R.drawable.avatar_boy)
@@ -64,7 +68,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder>{
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, ""+userEmail, Toast.LENGTH_SHORT).show();
+                /*Click user from user list to start chatting
+                 * Start activity by putting UID of receiver
+                 * we will use that UID to identify the user we are gona chat*/
+
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("hisUid", hisUID);
+                context.startActivity(intent);
             }
         });
     }

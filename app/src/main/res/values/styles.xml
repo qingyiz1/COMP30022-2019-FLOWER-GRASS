@@ -19,4 +19,16 @@
     <style name="MyTheme" parent="AppTheme">
         <item name="android:windowBackground">@android:color/white</item>
     </style>
+
+    <!--For activities containing toolbar-->
+    <!-- Theme Without ActionBar -->
+    <style name="AppThemeNo" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light" />
 </resources>

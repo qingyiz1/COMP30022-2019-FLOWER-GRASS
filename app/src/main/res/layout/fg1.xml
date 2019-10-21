@@ -10,7 +10,7 @@
         android:id="@+id/img_slideshow_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+
         android:background="@drawable/img_border" >
 
         <androidx.viewpager.widget.ViewPager
@@ -62,8 +62,8 @@
             android:id="@+id/EventListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:divider="@color/palevioletred"
+            android:background="@drawable/event_bg_3"
+            android:divider="@color/mediumseagreen"
             android:dividerHeight="@dimen/default_circle_indicator_stroke_width"
             android:textFilterEnabled="false" />
     </LinearLayout>

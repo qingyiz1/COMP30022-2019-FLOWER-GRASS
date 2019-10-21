@@ -84,7 +84,7 @@ public class SecondFragment extends Fragment {
     //Initialise Image slider and EventListView
     private void Init(View view) {
         //mViewPager = view.findViewById(R.id.view_pager);
-        mItemListView = view.findViewById(R.id.ItemListView);
+        //mItemListView = view.findViewById(R.id.EventListView);
         getEventsData();
         currentUser = new UserModel();
         currentUser.getNickname();
