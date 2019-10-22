@@ -72,7 +72,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!--EditText: input messageg-->
+        <!--EditText: input message-->
         <EditText
             android:id="@+id/messageEt"
             android:layout_weight="1"
