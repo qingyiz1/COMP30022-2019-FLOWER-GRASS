@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flowergrass.Activity.ChatActivity;
 import com.example.flowergrass.DataModel.ChatModel;
 import com.example.flowergrass.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
     private static final int MSG_TYPE_LEFT = 0;
     private static final int MSG_TYPE_RIGHT = 1;
     Context context;
-    List<ChatModel> chatList;
+    public static List<ChatModel> chatList;
     String imageUrl;
 
     FirebaseUser fUser;
@@ -35,11 +36,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
         this.context = context;
         this.chatList = chatList;
         this.imageUrl = imageUrl;
+        System.out.println("!!!: "+this.chatList.size());
+
     }
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
         //inflate layouts: row_chat_left.xml for receiver, row_Chat_right.xml for sender
         if (i==MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(context).inflate(R.layout.row_chat_right, viewGroup,false);
@@ -64,6 +68,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
         //set data
         myHolder.messageTv.setText(message);
+
         myHolder.timeTv.setText(dateTime);
         try{
             Picasso.get().load(imageUrl).into(myHolder.profileIv);
@@ -90,7 +95,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
     @Override
     public int getItemCount() {
-        return chatList.size();
+        System.out.println("******getItemCount = "+chatList.size());
+        return ChatActivity.chatList.size();
     }
 
     @Override

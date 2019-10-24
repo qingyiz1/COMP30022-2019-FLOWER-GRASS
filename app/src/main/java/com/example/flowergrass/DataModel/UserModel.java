@@ -45,6 +45,7 @@ public class UserModel {
         this.email = email;
         this.nickName = nickName;
         this.dateCreated = dateCreated;
+        this.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     public void getNickname() {

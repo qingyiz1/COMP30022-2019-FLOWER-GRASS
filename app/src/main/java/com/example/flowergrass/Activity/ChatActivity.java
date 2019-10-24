@@ -22,6 +22,7 @@ import com.example.flowergrass.adapter.ChatAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -51,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
     //for checking if user has seen message or not
     ListenerRegistration seenListener;
 
-    List<ChatModel> chatList;
+    public static List<ChatModel> chatList;
     ChatAdapter chatAdapter;
 
 
@@ -92,7 +93,7 @@ public class ChatActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         //search user to get that user's info
-        Query userQuery = db.collection("users").whereEqualTo("uid", hisUid);
+        Query userQuery = db.collection("users").whereEqualTo(FieldPath.documentId(), hisUid);
         //get user picture and name
         userQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -172,9 +173,11 @@ public class ChatActivity extends AppCompatActivity {
                             }
                             //adapter
                             chatAdapter = new ChatAdapter(ChatActivity.this, chatList, hisImage);
-                            chatAdapter.notifyDataSetChanged();;
+                            chatAdapter.notifyDataSetChanged();
                             //set adapter to recyclerview
                             recyclerView.setAdapter(chatAdapter);
+                            System.out.println("******chatActivity = "+ ChatAdapter.chatList.size());
+
                         }
                     }
                 });
