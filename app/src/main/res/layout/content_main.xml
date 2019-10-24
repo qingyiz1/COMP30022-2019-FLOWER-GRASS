@@ -145,22 +145,6 @@
         </LinearLayout>
 
 
-
-        <TextView
-            android:id="@+id/mStatusTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="what"
-            android:textColor="#B8C6C7"/>
-
-
-        <TextView
-            android:id="@+id/mDetailTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="details"
-            android:textColor="#B8C6C7"/>
-
     </LinearLayout>
 
 

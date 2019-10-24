@@ -52,7 +52,6 @@ public class HomeFragment extends Fragment {
     public static final String ARG_ITEM_ID = "home_fragment";
 
     private static final long ANIM_VIEWPAGER_DELAY = 10000;
-    private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
     private static final String TAG = "HOME_FRAGMENT";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -105,48 +104,6 @@ public class HomeFragment extends Fragment {
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         mIndicator.setOnPageChangeListener(new PageChangeListener());
         mIndicator.setViewPager(mViewPager);
-    }
-
-    public void runnable(final int size) {
-        handler = new Handler();
-        animateViewPager = new Runnable() {
-            public void run() {
-                if (!stopSliding) {
-                    if (mViewPager.getCurrentItem() == size - 1) {
-                        mViewPager.setCurrentItem(0);
-
-                    } else {
-                        mViewPager.setCurrentItem(
-                                mViewPager.getCurrentItem() + 1, true);
-                    }
-                    handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
-                }
-            }
-        };
-    }
-
-
-    @Override
-    public void onResume() {
-
-
-
-        //runnable(products.length);
-        //Re-run callback
-        //handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
-
-        super.onResume();
-    }
-
-
-    @Override
-    public void onPause() {
-
-        if (handler != null) {
-            //Remove callback
-            handler.removeCallbacks(animateViewPager);
-        }
-        super.onPause();
     }
 
     public void showAlertDialog(String message, final boolean finish) {
@@ -234,9 +191,6 @@ public class HomeFragment extends Fragment {
                         });
             }
         });
-
-
-
     }
 
 }

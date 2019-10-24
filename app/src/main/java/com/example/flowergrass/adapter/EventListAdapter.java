@@ -93,21 +93,6 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         }
 
 
-        if(getItem(position).getAuthorAvatarId() ==0){
-            DocumentReference docRef = db.collection("users").document(getItem(position).getAuthorUid());
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    avatarId = Integer.parseInt(documentSnapshot.get("avatarID").toString());
-                    Log.d(TAG,getItem(position).getAuthor()+""+avatarId);
-                    getItem(position).setAuthorAvatarId(avatarId);
-                    holder.avatar.setImageResource(getItem(position).getAuthorAvatarId());
-                }
-            });
-        }
-
-
-
         holder.title.setText(title);
         holder.author.setText(author);
         holder.dateCreated.setText(dateCreated.toDate().toString());

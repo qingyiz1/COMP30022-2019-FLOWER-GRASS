@@ -1,6 +1,11 @@
 package com.example.flowergrass.DataModel;
 
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,18 +27,28 @@ public class Event extends Post{
 
     public Event(String authorUid, String author, String title,String hashTag,Timestamp date, String content) {
         super(authorUid,author,title,hashTag,date,content);
+        getAuthorAvatar();
     }
 
     public Map<String,Object> toMap(){
         Map<String,Object> newEvent = super.toMap();
         newEvent.put("category",category);
         return newEvent;
-//        newEvent.put("Id",this.getId());
-//        newEvent.put("author",this.getAuthor());
-//        newEvent.put("title",this.getTitle());
-//        newEvent.put("dateCreated",this.getDate());
-//        newEvent.put("content",this.getContent());
-//        return newEvent;
+    }
+
+    private void getAuthorAvatar(){
+        DocumentReference docRef = db.collection("users").document(this.getAuthorUid());
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+              @Override
+              public void onSuccess(DocumentSnapshot documentSnapshot) {
+                  try {
+                      authorAvatarId = Integer.parseInt(documentSnapshot.get("avatarID").toString());
+                  } catch (NullPointerException e) {
+                      e.printStackTrace();
+                  }
+              }
+          }
+        );
     }
 
 }

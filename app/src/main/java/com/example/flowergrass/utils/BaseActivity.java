@@ -29,8 +29,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // Initialize Firebase Storage

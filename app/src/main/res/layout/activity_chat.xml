@@ -14,13 +14,13 @@
         android:background="@color/colorPrimaryDark"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!--Receiver profile picture-->
-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+        <ImageView
             android:id="@+id/profileIv"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_default"
-            app:c_background_color="@color/colorPrimaryDark"/>
+            />
 
 
         <LinearLayout

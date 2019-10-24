@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
+
+    private static final String TAG = "ChatActivity";
 
     //views from xml
     Toolbar toolbar;
@@ -96,6 +99,8 @@ public class ChatActivity extends AppCompatActivity {
         Query userQuery = db.collection("users").whereEqualTo(FieldPath.documentId(), hisUid);
         //get user picture and name
         userQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+
             @Override
             public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
                 //check until required info is received
@@ -105,9 +110,10 @@ public class ChatActivity extends AppCompatActivity {
 
                     //set data
                     nameTv.setText(name);
+                    Log.d(TAG, hisImage);
                     try {
                         //image received, set it to imageview in toolbar
-                        Picasso.get().load(hisImage).placeholder(R.drawable.ic_default).into(profileIv);
+                        profileIv.setImageResource(Integer.parseInt(hisImage));
                     }
                     catch (Exception e2) {
                         //there is exception getting picture, set default picture

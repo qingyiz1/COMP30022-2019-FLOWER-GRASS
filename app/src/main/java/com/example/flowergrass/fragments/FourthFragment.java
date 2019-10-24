@@ -3,6 +3,7 @@ package com.example.flowergrass.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -84,20 +85,24 @@ public class FourthFragment extends Fragment implements View.OnClickListener {
 
 
     public void getData(){
-
-        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DocumentSnapshot doc = task.getResult();
-                            mEmail.setText(doc.getString("email"));
-                            mNickname.setText(doc.getString("nickName"));
-                            mBirthday.setText(doc.getString("birthday"));
-                            mAvatar.setImageResource(Integer.parseInt(doc.get("avatarID").toString()));
-                        }
-                    }
-                });
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot doc = task.getResult();
+                                    mEmail.setText(doc.getString("email"));
+                                    mNickname.setText(doc.getString("nickName"));
+                                    mBirthday.setText(doc.getString("birthday"));
+                                    mAvatar.setImageResource(Integer.parseInt(doc.get("avatarID").toString()));
+                                }
+                            }
+                        });
+            }
+        });
     }
 
     @Override

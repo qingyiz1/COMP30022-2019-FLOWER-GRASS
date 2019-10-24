@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+        <ImageView
             android:id="@+id/avatarIv"
             android:src="@drawable/avatar_boy"
             android:layout_width="70dp"
