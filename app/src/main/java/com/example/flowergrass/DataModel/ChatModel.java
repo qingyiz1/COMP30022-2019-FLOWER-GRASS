@@ -1,16 +1,18 @@
 package com.example.flowergrass.DataModel;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.PropertyName;
 
 public class ChatModel {
-    String message, receiver, sender, timestamp;
+    String message, receiver, sender;
+    Timestamp timestamp;
     boolean isSeen;
 
     public ChatModel() {
     }
 
-    public ChatModel(String messaege, String receiver, String sender, String timestamp, boolean isSeen) {
-        this.message = messaege;
+    public ChatModel(String message, String receiver, String sender, Timestamp timestamp, boolean isSeen) {
+        this.message = message;
         this.receiver = receiver;
         this.sender = sender;
         this.timestamp = timestamp;
@@ -41,11 +43,11 @@ public class ChatModel {
         this.sender = sender;
     }
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 

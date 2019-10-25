@@ -20,10 +20,12 @@ import android.widget.Toast;
 import com.example.flowergrass.DataModel.ChatModel;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.ChatAdapter;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldPath;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -49,13 +51,13 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton sendBtn;
 
     //firebase auth
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-    FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     //for checking if user has seen message or not
     ListenerRegistration seenListener;
 
-    public static List<ChatModel> chatList;
+    public static List<ChatModel> chatList = new ArrayList<>();
     ChatAdapter chatAdapter;
 
 
@@ -67,7 +69,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
 
         //init views
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -87,20 +88,27 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        getUserInfo();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handleMessage();
+    }
+
+    private void getUserInfo() {
         Intent intent = getIntent();
         hisUid = intent.getStringExtra("hisUid");
 
         //firebase auth instance
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        db = FirebaseFirestore.getInstance();
+        myUid = firebaseAuth.getUid();
 
         //search user to get that user's info
         Query userQuery = db.collection("users").whereEqualTo(FieldPath.documentId(), hisUid);
         //get user picture and name
         userQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-
-
             @Override
             public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
                 //check until required info is received
@@ -110,7 +118,6 @@ public class ChatActivity extends AppCompatActivity {
 
                     //set data
                     nameTv.setText(name);
-                    Log.d(TAG, hisImage);
                     try {
                         //image received, set it to imageview in toolbar
                         profileIv.setImageResource(Integer.parseInt(hisImage));
@@ -122,13 +129,15 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void handleMessage(){
         //click button to send message
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //get text from edit text
-                String message = messageEt.getText().toString().trim();
+                String message = messageEt.getText().toString();
                 //check if text is empty or not
                 if (TextUtils.isEmpty(message)){
                     //text empty
@@ -142,8 +151,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         readMessages();
-
-        seenMessage();
+        //seenMessage();
     }
 
     private void seenMessage() {
@@ -165,16 +173,22 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void readMessages() {
-        chatList = new ArrayList<>();
-        db.collection("chats")
+        db.collection("chats").orderBy("dateCreated", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
                         chatList.clear();
                         for (QueryDocumentSnapshot doc: snapshots) {
-                            ChatModel chat = doc.toObject(ChatModel.class);
-                            if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid) ||
-                                    chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)) {
+                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
+
+                            ChatModel chat = new ChatModel(doc.getString("message"),doc.getString("receiver"),doc.getString("sender"),
+                                    date,doc.getBoolean("isSeen"));
+
+                                Log.d(TAG,myUid);
+                                Log.d(TAG,hisUid);
+                            if ((chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) ||
+                                    (chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid))) {
+                                Log.d(TAG,chat.toString());
                                 chatList.add(chat);
                             }
                             //adapter
@@ -191,15 +205,13 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage(String message) {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        String timestamp = String.valueOf(System.currentTimeMillis());
+        Timestamp timestamp = Timestamp.now();
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", myUid);
         hashMap.put("receiver", hisUid);
         hashMap.put("message", message);
-        hashMap.put("timestamp", timestamp);
+        hashMap.put("dateCreated", timestamp);
         hashMap.put("isSeen", false);
         db.collection("chats").add(hashMap);
 
@@ -207,31 +219,11 @@ public class ChatActivity extends AppCompatActivity {
         messageEt.setText("");
     }
 
-    private void checkUserStatus() {
-        //get current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-            //user is singed in stay here
-            //set email of logged in user
-            //mProfileTv.setText(user.setEmail());
-            myUid = user.getUid(); //currently signed in user;s uid
-        }
-        else {
-            //user not signed in, go to main activity
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
-    }
+
 
     @Override
-    protected void onStart() {
-        checkUserStatus();
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        seenListener.remove();
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }

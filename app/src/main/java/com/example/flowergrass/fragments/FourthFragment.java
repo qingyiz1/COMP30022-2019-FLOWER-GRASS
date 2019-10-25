@@ -64,11 +64,10 @@ public class FourthFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg4, container, false);
         Init(view);
-        //loadWithGlide(view,R.id.);
         return view;
     }
 
-    //Initialise Image slider and EventListView
+    //Initialise
     private void Init(View view) {
         mEmail = view.findViewById(R.id.me_email);
         mNickname = view.findViewById(R.id.me_nickname);

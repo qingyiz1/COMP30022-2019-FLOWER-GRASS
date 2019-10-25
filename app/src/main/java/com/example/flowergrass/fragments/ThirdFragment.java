@@ -42,11 +42,13 @@ public class ThirdFragment extends Fragment {
 
     RecyclerView recyclerView;
     UserAdapter userAdapter;
-    List<UserModel> userList;
+    List<UserModel> userList = new ArrayList<>();
     String TAG = "userList refreshing";
 
     //firebase auth
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth =  FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ThirdFragment() {
         //empty constructor
@@ -57,16 +59,11 @@ public class ThirdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fg3, container, false);
-        //init
-        firebaseAuth = FirebaseAuth.getInstance();
         //init recyclerview
         recyclerView = view.findViewById(R.id.users_recyclerView);
         //set its properties
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        //init user list
-        userList = new ArrayList<>();
 
         //getAll users
         getAllUsers();
@@ -75,11 +72,7 @@ public class ThirdFragment extends Fragment {
     }
 
     private void getAllUsers() {
-        //get current user
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //get path of database named "Users" containing users info
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        //get path of database named "users" containing users info
         db.collection("users")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -93,13 +86,12 @@ public class ThirdFragment extends Fragment {
                         for (QueryDocumentSnapshot doc : snapshots) {
                             UserModel userModel = doc.toObject(UserModel.class);
                             userModel.setUid(doc.getId());
+                            System.out.println(doc.getId());
                             if (!userModel.getUid().equals(firebaseUser.getUid())) {
                                 userList.add(userModel);
                             }
-                            //adapter
-                            userAdapter = new UserAdapter(getActivity(), userList);
                             //set adapter to recycler view
-                            recyclerView.setAdapter(userAdapter);
+                            recyclerView.setAdapter(new UserAdapter(getActivity(), userList));
                         }
                         Log.d(TAG, "current users: " + userList);
                     }
@@ -107,11 +99,7 @@ public class ThirdFragment extends Fragment {
     }
 
     private void searchUsers(final String query) {
-        //get current user
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //get path of database named "Users" containing users info
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db.collection("users")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -142,25 +130,10 @@ public class ThirdFragment extends Fragment {
                             //set adapter to recycler view
                             recyclerView.setAdapter(userAdapter);
                         }
-                        Log.d(TAG, "current users: " + userList);
                     }
                 });
     }
 
-    private void checkUserStatus() {
-        //get current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-            //user is singed in stay here
-            //set email of logged in user
-            //mProfileTv.setText(user.setEmail());
-        }
-        else {
-            //user not signed in, go to main activity
-            startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();
-        }
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -208,16 +181,12 @@ public class ThirdFragment extends Fragment {
     }
 
     /*handle menu item clicks*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //get item id
         int id = item.getItemId();
         if (id == R.id.action_logout) {
-            firebaseAuth.signOut();
-            checkUserStatus();
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

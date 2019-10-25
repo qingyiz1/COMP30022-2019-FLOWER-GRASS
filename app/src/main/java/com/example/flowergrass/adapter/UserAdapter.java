@@ -71,7 +71,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder>{
                 /*Click user from user list to start chatting
                  * Start activity by putting UID of receiver
                  * we will use that UID to identify the user we are gona chat*/
-
                 Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("hisUid", hisUID);
                 context.startActivity(intent);

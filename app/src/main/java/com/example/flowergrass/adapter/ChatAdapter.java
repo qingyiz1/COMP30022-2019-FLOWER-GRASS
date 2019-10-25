@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flowergrass.Activity.ChatActivity;
 import com.example.flowergrass.DataModel.ChatModel;
 import com.example.flowergrass.R;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -36,14 +38,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
         this.context = context;
         this.chatList = chatList;
         this.imageUrl = imageUrl;
-        System.out.println("!!!: "+this.chatList.size());
-
     }
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         //inflate layouts: row_chat_left.xml for receiver, row_Chat_right.xml for sender
         if (i==MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(context).inflate(R.layout.row_chat_right, viewGroup,false);
@@ -59,17 +58,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
         //get data
         String message = chatList.get(i).getMessage();
-        String timeStamp = chatList.get(i).getTimestamp();
+        Timestamp timeStamp = chatList.get(i).getTimestamp();
 
         //convert time stamp to dd/mm/yyyy hh:mm am/pm
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(Long.parseLong(timeStamp));
-        String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa", cal).toString();
+        String dateTime = timeStamp.toDate().toString();
+        String[] parts = dateTime.split(" ");
+        String time= parts[3];
 
         //set data
         myHolder.messageTv.setText(message);
-
-        myHolder.timeTv.setText(dateTime);
+        myHolder.timeTv.setText(time);
         try{
             Picasso.get().load(imageUrl).into(myHolder.profileIv);
         }

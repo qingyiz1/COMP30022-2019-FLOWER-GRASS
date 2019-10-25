@@ -126,8 +126,17 @@ public class SignupActivity extends MainActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "create failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(SignupActivity.this)
+                                    .setTitle("Error!")
+                                    .setMessage(task.getException().toString())
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, null)
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    //.setNegativeButton(android.R.string.no, null)
+                                    .setIcon(R.drawable.ic_error)
+                                    .show();
+
                             //updateUI(null);
                         }
 
