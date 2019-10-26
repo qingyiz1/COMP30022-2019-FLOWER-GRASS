@@ -117,31 +117,24 @@ public class SecondFragment extends Fragment {
 
                         }
 
-                        ArrayList<Post> right_posts = new ArrayList<>();
-                        ArrayList<Post> left_posts = new ArrayList<>();
+                        ArrayList<Post> right_items = new ArrayList<>();
+                        ArrayList<Post> left_events = new ArrayList<>();
 
                         for (int i = 0; i < posts.size(); i++) {
-                            if ((i % 2) ==  0) {
-                                right_posts.add(posts.get(i));
+                            if ((posts.get(i)) instanceof Item){
+                                right_items.add(posts.get(i));
                             }
                             else {
-                                left_posts.add(posts.get(i));
+                                left_events.add(posts.get(i));
                             }
                         }
 
-                        TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,right_posts));
-                        TimelineLeft.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_left,left_posts));
+                        TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,right_items));
+                        TimelineLeft.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_left,left_events));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 
                 });
-
-
-
     }
-
-
-
-
 
 }
