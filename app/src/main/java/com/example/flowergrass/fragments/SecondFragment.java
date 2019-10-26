@@ -54,6 +54,7 @@ public class SecondFragment extends Fragment {
 
     // UI References
     private ListView TimelineRight;
+    private ListView TimelineLeft;
 
 
     //Data - Temporary
@@ -80,6 +81,7 @@ public class SecondFragment extends Fragment {
     private void Init(View view) {
         //mViewPager = view.findViewById(R.id.view_pager);
         TimelineRight = view.findViewById(R.id.TIMELINERIGHT);
+        TimelineLeft = view.findViewById((R.id.TIMELINELEFT));
         getEventsData();
         currentUser = new UserModel();
         currentUser.getNickname();
@@ -117,7 +119,21 @@ public class SecondFragment extends Fragment {
                             }
 
                         }
-                        TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,posts));
+
+                        ArrayList<Post> right_posts = new ArrayList<>();
+                        ArrayList<Post> left_posts = new ArrayList<>();
+
+                        for (int i = 0; i < posts.size(); i++) {
+                            if ((i%2) ==  0) {
+                                left_posts.add(posts.get(i));
+                            }
+                            else {
+                                right_posts.add(posts.get(i));
+                            }
+                        }
+
+                        TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,right_posts));
+                        TimelineLeft.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_left,left_posts));
                         Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 
