@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="100dp"
+    android:layout_height="130dp"
     >
 
 
     <TextView
-        android:id="@+id/EventName"
+        android:id="@+id/PostName"
         android:layout_width="217dp"
         android:layout_height="106dp"
         android:layout_weight="1"
@@ -19,15 +19,15 @@
 
 
     <ImageView
-        android:id="@+id/EventAvatar"
+        android:id="@+id/SmallLine"
         android:layout_width="214dp"
-        android:layout_height="191dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="-30dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/timeline_small_line" />
 
     <TextView
-        android:id="@+id/EventDate"
+        android:id="@+id/PostDate"
         android:layout_width="185dp"
         android:layout_height="123dp"
         android:layout_marginTop="40dp"
@@ -37,7 +37,7 @@
         android:textSize="8dp" />
 
     <TextView
-        android:id="@+id/EventDetails"
+        android:id="@+id/PostDetails"
         android:padding="5dp"
         android:layout_width="111dp"
         android:layout_height="88dp"
@@ -49,6 +49,14 @@
         android:text="EventDetails"
         android:textColor="@color/black"
         android:textSize="12dp" />
+
+    <ImageView
+        android:id="@+id/ItemImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        android:layout_marginTop="80dp"
+        />
 
 
 </RelativeLayout>

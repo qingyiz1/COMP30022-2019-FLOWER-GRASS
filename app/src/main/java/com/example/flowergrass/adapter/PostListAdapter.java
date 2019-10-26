@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import com.example.flowergrass.R;
 import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.DataModel.Post;
+
+import com.example.flowergrass.DataModel.Item;
 import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView name;
         TextView date;
         TextView details;
+        ImageView image;
     }
 
 
@@ -62,9 +66,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
-            holder.name = convertView.findViewById(R.id.EventName);
-            holder.date = convertView.findViewById(R.id.EventDate);
-            holder.details = convertView.findViewById(R.id.EventDetails);
+            holder.name = convertView.findViewById(R.id.PostName);
+            holder.date = convertView.findViewById(R.id.PostDate);
+            holder.details = convertView.findViewById(R.id.PostDetails);
+            holder.image = convertView.findViewById(R.id.ItemImage);
             convertView.setTag(holder);
         }
         else {
@@ -84,6 +89,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.name.setText(title);
         holder.date.setText(dateFinalised);
         holder.details.setText(content);
+        /*
+        if(getItem(position) instanceof Item){
+
+        }*/
 
 
         return convertView;

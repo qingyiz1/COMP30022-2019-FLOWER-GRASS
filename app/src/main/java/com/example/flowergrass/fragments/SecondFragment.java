@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.flowergrass.DataModel.Item;
 import com.example.flowergrass.R;
 import com.example.flowergrass.adapter.PostListAdapter;
 import com.example.flowergrass.DataModel.Event;
@@ -91,10 +92,6 @@ public class SecondFragment extends Fragment {
 
 
 
-
-
-
-
     public void getEventsData(){
         db.collection("posts")
                 .orderBy("dateCreated", Query.Direction.DESCENDING).limit(10)
@@ -112,7 +109,7 @@ public class SecondFragment extends Fragment {
                             Timestamp date = (Timestamp) doc.getData().get("dateCreated");
 
                             if(doc.getString("imageUrl") != null){
-                                //posts.add(new Item(doc.getId(),doc.getString("title"),date.toDate().toString(),doc.getString("content"),doc.getString("imageUrl")));
+                                posts.add(new Item(doc.getId(),currentUser.nickName,doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
                             }else{
                                 posts.add(new Event(doc.getId(),currentUser.nickName,doc.getString("title"),doc.getString("hashTag"),date,doc.getString("content")));
 
@@ -124,7 +121,7 @@ public class SecondFragment extends Fragment {
                         ArrayList<Post> left_posts = new ArrayList<>();
 
                         for (int i = 0; i < posts.size(); i++) {
-                            if ((i%2) ==  0) {
+                            if ((i % 2) ==  0) {
                                 right_posts.add(posts.get(i));
                             }
                             else {
@@ -138,7 +135,11 @@ public class SecondFragment extends Fragment {
                     }
 
                 });
+
+
+
     }
+
 
 
 

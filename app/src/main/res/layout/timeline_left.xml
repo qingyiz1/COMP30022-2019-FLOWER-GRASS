@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/EventName"
+        android:id="@+id/PostName"
         android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_weight="1"
@@ -23,7 +23,7 @@
 
 
     <ImageView
-        android:id="@+id/EventAvatar"
+        android:id="@+id/SmallLine"
         android:layout_width="214dp"
         android:layout_height="191dp"
         android:layout_alignParentEnd="true"
@@ -33,7 +33,7 @@
         android:src="@drawable/timeline_small_line" />
 
     <TextView
-        android:id="@+id/EventDate"
+        android:id="@+id/PostDate"
         android:layout_width="105dp"
         android:layout_height="15dp"
         android:layout_weight="1"
@@ -47,7 +47,7 @@
     <TextView
 
 
-        android:id="@+id/EventDetails"
+        android:id="@+id/PostDetails"
         android:padding="5dp"
         android:layout_width="100dp"
         android:layout_height="150dp"
