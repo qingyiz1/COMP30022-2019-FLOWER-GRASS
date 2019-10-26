@@ -10,27 +10,55 @@
 
     <LinearLayout
         android:weightSum="2"
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="horizontal">
 
+
+
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/TIMELINELEFT"
+            <TextView
+                android:id="@+id/events_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="100dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:text="EVENTS"
+                android:textColor="#CCCCCC"
+                android:textSize="24dp"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/TIMELINELEFT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"></ListView>
+            </LinearLayout>
+
+
+
+
         </LinearLayout>
+
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-18dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="-10dp"
             android:layout_marginRight="-5dp"
             android:src="@drawable/timeline_main_line"></ImageView>
 
@@ -38,14 +66,34 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/TIMELINERIGHT"
+            <TextView
+                android:id="@+id/items_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
-        </LinearLayout>
+                android:layout_height="100dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:text="ITEMS"
+                android:textColor="#DBDADA"
+                android:textSize="24dp"></TextView>
 
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/TIMELINERIGHT"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="60dp"
+                    android:layout_height="wrap_content"></ListView>
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
 

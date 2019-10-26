@@ -39,7 +39,7 @@
     <color name="viewfinder_mask">#60000000</color>
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#D1D1D1</color>
     <!--白色 -->
     <color name="ivory">#FFFFF0</color>
     <!--象牙色 -->
