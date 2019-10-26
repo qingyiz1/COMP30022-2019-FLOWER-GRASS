@@ -125,10 +125,10 @@ public class SecondFragment extends Fragment {
 
                         for (int i = 0; i < posts.size(); i++) {
                             if ((i%2) ==  0) {
-                                left_posts.add(posts.get(i));
+                                right_posts.add(posts.get(i));
                             }
                             else {
-                                right_posts.add(posts.get(i));
+                                left_posts.add(posts.get(i));
                             }
                         }
 
