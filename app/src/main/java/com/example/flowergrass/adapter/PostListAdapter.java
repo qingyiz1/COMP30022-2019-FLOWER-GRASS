@@ -74,8 +74,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String[] dateCut = dateCreated.toDate().toString().split(" ");
         String dateFinalised = new String();
         for (int i = 0; i < dateCut.length; i++) {
-            if (i == 4){
-            }
+            if (i == 4){}
             else {
                 dateFinalised += dateCut[i];
                 dateFinalised += ' ';

@@ -12,6 +12,7 @@
         android:layout_width="217dp"
         android:layout_height="106dp"
         android:layout_weight="1"
+        android:layout_marginTop="9dp"
         android:text="EventName"
         android:textColor="@color/white"
         android:textSize="15dp" />

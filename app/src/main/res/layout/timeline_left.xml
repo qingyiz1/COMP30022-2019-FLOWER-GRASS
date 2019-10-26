@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/EventDate"
-        android:layout_width="150dp"
+        android:layout_width="105dp"
         android:layout_height="15dp"
         android:layout_weight="1"
         android:layout_alignParentEnd="true"
