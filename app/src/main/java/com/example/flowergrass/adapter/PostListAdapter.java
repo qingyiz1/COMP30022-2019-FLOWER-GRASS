@@ -49,7 +49,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String id = getItem(position).getId();
         String author = getItem(position).getAuthor();
         String title = getItem(position).title;
+
         Timestamp dateCreated = getItem(position).getDateCreated();
+
+
         String content = getItem(position).getContent();
 
         //ViewHolder object
@@ -68,8 +71,19 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        String[] dateCut = dateCreated.toDate().toString().split(" ");
+        String dateFinalised = new String();
+        for (int i = 0; i < dateCut.length; i++) {
+            if (i == 4){
+            }
+            else {
+                dateFinalised += dateCut[i];
+                dateFinalised += ' ';
+            }
+        }
+
         holder.name.setText(title);
-        holder.date.setText(dateCreated.toDate().toString());
+        holder.date.setText(dateFinalised);
         holder.details.setText(content);
 
 
