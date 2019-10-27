@@ -25,9 +25,11 @@
 Tests can be found in the 
 
 ## Built With
+- Android Studio
+- Firebase - Cloud messaging service
+- Sketch - User interface design
 
-
-## Authors
+## Contributors
 
 - Qingyi Zhou
 - Chou Chun Yiu
