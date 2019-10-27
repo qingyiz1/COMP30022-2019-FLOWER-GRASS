@@ -3,8 +3,9 @@
 
 # COMP30022 IT-Project: Family
 
+The family is a small-scale family-based social software application.
+It not only allows customers to share their private artefacts collections with their families, but also presents customers with important to-do list for the entire family day. Besides, it provides basic chat features that allow our target family to have private internal communication.
 
- Family is a mobile application that helps users to .
 
 The application consists of the following sections:
 
