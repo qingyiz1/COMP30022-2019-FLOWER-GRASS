@@ -4,7 +4,19 @@
 # COMP30022 IT-Project: Family
 
 
- is a mobile application that helps users to .
+ Family is a mobile application that helps users to .
+
+The application consists of the following sections:
+
+- sign up activity
+- log in activity
+- chat activity - to chat with your family members
+- avatar activity - to choose your own avatar
+- new event/item activity - to create new event/item
+- item detail activity - to show the detail of a specific item
+- homepage
+- main activity
+
 
 
 ## Installation and Usage Guide
