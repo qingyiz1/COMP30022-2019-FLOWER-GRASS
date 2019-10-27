@@ -16,9 +16,13 @@ The application consists of the following sections:
 - new event/item activity - to create new event/item
 - item detail activity - to show the detail of a specific item
 - homepage - consist four fragments (Activity, Timeline, Message and Me)
+
            - Activity is a summary of the recent trending items and events in the family
+           
            - Timeline shows all items and events ordered by createdDate
+           
            - Message shows a list of all family members, you can start chatting by clikcing any family member
+           
            - Me is the profile page, shows user's basic information
 
 
