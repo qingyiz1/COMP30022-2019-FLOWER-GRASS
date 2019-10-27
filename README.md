@@ -9,14 +9,17 @@ It not only allows customers to share their private artefacts collections with t
 
 The application consists of the following sections:
 
-- sign up activity
-- log in activity
+- sign up activity - handling registration of new users
+- MainActivity (log in activity) - handling log in of users
 - chat activity - to chat with your family members
 - avatar activity - to choose your own avatar
 - new event/item activity - to create new event/item
 - item detail activity - to show the detail of a specific item
-- homepage
-- main activity
+- homepage - consist four fragments (Activity, Timeline, Message and Me)
+           - Activity is a summary of the recent trending items and events in the family
+           - Timeline shows all items and events ordered by createdDate
+           - Message shows a list of all family members, you can start chatting by clikcing any family member
+           - Me is the profile page, shows user's basic information
 
 
 
