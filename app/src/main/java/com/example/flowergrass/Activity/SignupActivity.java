@@ -64,30 +64,14 @@ public class SignupActivity extends MainActivity {
 
     public void updateDatabase(String filePath){
         String birthday = fieldBirthday.getText().toString()+"/"+fieldBirthMonth.getText().toString()+"/"+fieldBirthYear.getText().toString();
-
         this.newUser = new UserModel(currentImgId,birthday,mEmailField.getText().toString(),mNickName.getText().toString(), Timestamp.now());
 
-
-
         db.collection("users").document(filePath)
-                .set(newUser.toMap())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
+                .set(newUser.toMap());
     }
 
 
     protected void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -101,7 +85,6 @@ public class SignupActivity extends MainActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
                             userUID = mAuth.getUid();
                             updateDatabase(userUID);
 

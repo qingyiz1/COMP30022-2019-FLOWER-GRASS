@@ -4,6 +4,7 @@ package com.example.flowergrass.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -83,7 +84,11 @@ public class SecondFragment extends Fragment {
         //mViewPager = view.findViewById(R.id.view_pager);
         TimelineRight = view.findViewById(R.id.TIMELINERIGHT);
         TimelineLeft = view.findViewById((R.id.TIMELINELEFT));
-        getEventsData();
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {getEventsData();}});
+
         currentUser = new UserModel();
         currentUser.getNickname();
         //mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
@@ -105,7 +110,6 @@ public class SecondFragment extends Fragment {
                         }
 
                         for (QueryDocumentSnapshot doc : value) {
-                            Log.d(TAG,"Problem:"+doc.getData().get("dateCreated"));
                             Timestamp date = (Timestamp) doc.getData().get("dateCreated");
 
                             if(doc.getString("imageUrl") != null){
@@ -131,7 +135,6 @@ public class SecondFragment extends Fragment {
 
                         TimelineRight.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_right,right_items));
                         TimelineLeft.setAdapter(new PostListAdapter(getContext(),R.layout.timeline_left,left_events));
-                        Log.d(TAG, "Current posts in : " + posts.toString());
                     }
 
                 });

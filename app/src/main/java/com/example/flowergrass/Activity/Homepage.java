@@ -266,11 +266,10 @@ public class Homepage extends FragmentActivity implements View.OnClickListener {
         }
     }
 
-    public void ShowItemDetail(int position) {
+    public void ShowItemDetail(String itemId) {
         Intent intent = new Intent(Homepage.this,ItemDetailsActivity.class);
-        intent.putExtra("id",position);
+        intent.putExtra("filePath",itemId);
         startActivity(intent);
-        finish();
     }
 }
 

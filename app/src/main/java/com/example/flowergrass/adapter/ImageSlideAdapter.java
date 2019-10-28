@@ -55,11 +55,20 @@ public class ImageSlideAdapter extends PagerAdapter {
         ImageView mImageView = view.findViewById(R.id.image_display);
         mImageView.setImageResource(images[position]);
         TextView imgName = view.findViewById(R.id.img_name);
-        imgName.setText("GAME TAPE");
+        imgName.setText("Items");
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.ShowItemDetail(position);
+                String itemId;
+                if(position == 1){
+                    itemId = "WT60EPoAYKb5tcffy67LlwS0nxH3Tue Oct 22 02:39:13 GMT+11:00 2019";
+                }else if(position ==2){
+                    itemId = "GJ9p9qDKnFW4sxTGbL6CTc51fVF2Tue Oct 29 02:25:57 GMT+11:00 2019";
+                }else{
+                    itemId = "WT60EPoAYKb5tcffy67LlwS0nxH3Tue Oct 22 02:32:17 GMT+11:00 2019";
+                }
+
+                activity.ShowItemDetail(itemId);
             }
         });
 

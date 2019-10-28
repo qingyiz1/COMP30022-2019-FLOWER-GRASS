@@ -63,11 +63,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
         //convert time stamp to dd/mm/yyyy hh:mm am/pm
         String dateTime = timeStamp.toDate().toString();
         String[] parts = dateTime.split(" ");
+        String day = parts[1]+" "+parts[2];
         String time= parts[3];
 
         //set data
         myHolder.messageTv.setText(message);
-        myHolder.timeTv.setText(time);
+        myHolder.timeTvUp.setText(day);
+        myHolder.timeTvBtm.setText(time);
+
         try{
             Picasso.get().load(imageUrl).into(myHolder.profileIv);
         }
@@ -93,7 +96,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
     @Override
     public int getItemCount() {
-        System.out.println("******getItemCount = "+chatList.size());
         return ChatActivity.chatList.size();
     }
 
@@ -114,7 +116,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
         ///views
         ImageView profileIv;
-        TextView messageTv, timeTv, isSeenTv;
+        TextView messageTv, timeTvUp, timeTvBtm, isSeenTv;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,7 +124,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
             //init views
             profileIv = itemView.findViewById(R.id.profileIv);
             messageTv = itemView.findViewById(R.id.messageTv);
-            timeTv = itemView.findViewById(R.id.timeTv);
+            timeTvUp = itemView.findViewById(R.id.timeTvUp);
+            timeTvBtm = itemView.findViewById(R.id.timeTvBtm);
+
             isSeenTv = itemView.findViewById(R.id.isSeenTv);
 
 

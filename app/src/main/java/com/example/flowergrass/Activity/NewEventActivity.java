@@ -71,8 +71,6 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-
                         new AlertDialog.Builder(NewEventActivity.this)
                                 .setTitle("Success!")
                                 .setMessage("New event successfully created!")

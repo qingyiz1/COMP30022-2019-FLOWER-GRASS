@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
      * @param password
      */
     private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
         }

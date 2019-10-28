@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.flowergrass.Activity.Homepage;
 import com.example.flowergrass.R;
 import com.example.flowergrass.DataModel.Event;
 import com.example.flowergrass.DataModel.Post;
@@ -28,6 +29,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    Homepage activity;
 
     /**
      * Holds variables in a View
@@ -44,11 +46,12 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        activity = (Homepage)context;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         //get event information
         String id = getItem(position).getId();
         String author = getItem(position).getAuthor();
@@ -57,7 +60,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         Timestamp dateCreated = getItem(position).getDateCreated();
 
 
-        String content = getItem(position).getContent();
+        final String content = getItem(position).getContent();
 
         //ViewHolder object
         ViewHolder holder;
@@ -78,7 +81,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
         String[] dateCut = dateCreated.toDate().toString().split(" ");
         String dateFinalised = new String();
-        for (int i = 0; i < dateCut.length; i++) {
+        for (int i = 1; i < dateCut.length; i++) {
             if (i == 4){}
             else {
                 dateFinalised += dateCut[i];
@@ -89,10 +92,13 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.name.setText(title);
         holder.date.setText(dateFinalised);
         holder.details.setText(content);
-        /*
-        if(getItem(position) instanceof Item){
 
-        }*/
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.ShowItemDetail(getItem(position).getAuthorUid());
+            }
+        });
 
 
         return convertView;

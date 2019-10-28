@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+        <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/profileIv"
-            app:c_border_color="@null"
             android:src="@drawable/ic_default"/>
 
         <TextView
@@ -29,13 +28,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/timeTv"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="02/03/2019 05:59PM"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/timeTvUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="02/03/2019 05:59PM"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/timeTvBtm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02/03/2019 05:59PM"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+        </LinearLayout>
 
     </LinearLayout>
 

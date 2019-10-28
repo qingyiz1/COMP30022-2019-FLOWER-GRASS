@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -173,34 +174,36 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void readMessages() {
-        db.collection("chats").orderBy("dateCreated", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
-                        chatList.clear();
-                        for (QueryDocumentSnapshot doc: snapshots) {
-                            Timestamp date = (Timestamp)doc.getData().get("dateCreated");
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.collection("chats").orderBy("dateCreated", Query.Direction.ASCENDING)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                                chatList.clear();
+                                for (QueryDocumentSnapshot doc : snapshots) {
+                                    Timestamp date = (Timestamp) doc.getData().get("dateCreated");
 
-                            ChatModel chat = new ChatModel(doc.getString("message"),doc.getString("receiver"),doc.getString("sender"),
-                                    date,doc.getBoolean("isSeen"));
+                                    ChatModel chat = new ChatModel(doc.getString("message"), doc.getString("receiver"), doc.getString("sender"),
+                                            date, doc.getBoolean("isSeen"));
 
-                                Log.d(TAG,myUid);
-                                Log.d(TAG,hisUid);
-                            if ((chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) ||
-                                    (chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid))) {
-                                Log.d(TAG,chat.toString());
-                                chatList.add(chat);
+                                    if ((chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) ||
+                                            (chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid))) {
+                                        chatList.add(chat);
+                                    }
+                                    //adapter
+                                    chatAdapter = new ChatAdapter(ChatActivity.this, chatList, hisImage);
+                                    chatAdapter.notifyDataSetChanged();
+                                    //set adapter to recyclerview
+                                    recyclerView.setAdapter(chatAdapter);
+                                    System.out.println("******chatActivity = " + ChatAdapter.chatList.size());
+
+                                }
                             }
-                            //adapter
-                            chatAdapter = new ChatAdapter(ChatActivity.this, chatList, hisImage);
-                            chatAdapter.notifyDataSetChanged();
-                            //set adapter to recyclerview
-                            recyclerView.setAdapter(chatAdapter);
-                            System.out.println("******chatActivity = "+ ChatAdapter.chatList.size());
-
-                        }
-                    }
-                });
+                        });
+            }
+        });
     }
 
     private void sendMessage(String message) {

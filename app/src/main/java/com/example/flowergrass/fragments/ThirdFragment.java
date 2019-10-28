@@ -61,12 +61,13 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fg3, container, false);
         //init recyclerview
         recyclerView = view.findViewById(R.id.users_recyclerView);
+        getAllUsers();
         //set its properties
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //getAll users
-        getAllUsers();
+
 
         return view;
     }
@@ -86,14 +87,13 @@ public class ThirdFragment extends Fragment {
                         for (QueryDocumentSnapshot doc : snapshots) {
                             UserModel userModel = doc.toObject(UserModel.class);
                             userModel.setUid(doc.getId());
-                            System.out.println(doc.getId());
                             if (!userModel.getUid().equals(firebaseUser.getUid())) {
                                 userList.add(userModel);
                             }
                             //set adapter to recycler view
                             recyclerView.setAdapter(new UserAdapter(getActivity(), userList));
                         }
-                        Log.d(TAG, "current users: " + userList);
+                        //Log.d(TAG, "current users: " + userList);
                     }
                 });
     }

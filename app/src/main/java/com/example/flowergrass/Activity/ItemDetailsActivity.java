@@ -41,17 +41,13 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(ItemDetailsActivity.this,Homepage.class);
-        startActivity(intent);
-        finish();
-        super.onBackPressed();
-    }
+
 
     public void getData(){
+        Intent intent = getIntent();
+        String filePath = intent.getStringExtra("filePath");
 
-        db.collection("posts").document("WT60EPoAYKb5tcffy67LlwS0nxH3Tue Oct 22 02:32:17 GMT+11:00 2019").get()
+        db.collection("posts").document(filePath).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
