@@ -47,7 +47,7 @@ The application consists of the following sections:
 
 
 ## Testing
-Tests can be found in the 
+Testing conducted on all systems manually
 
 
 ## Built With
